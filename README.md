@@ -17,14 +17,6 @@ from mandaw import *
 
 Make a window
 ```py
-mandaw = Mandaw("title", width = 800, height = 600, bgcolor = "black")
-```
-```py
-while True:
-    mandaw.run()
-```
-All the code
-```py
 from mandaw import *
 
 mandaw = Mandaw("title", width = 800, height = 600, bgcolor = "black")
