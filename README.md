@@ -12,12 +12,12 @@ python3 setup.py install
 # Getting Started
 import Mandaw
 ```py
-from mandaw import *
+from mandaw.main import *
 ```
 
 Make a window
 ```py
-from mandaw import *
+from mandaw.main import *
 
 mandaw = Mandaw("title", width = 800, height = 600, bgcolor = "black")
 
