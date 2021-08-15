@@ -21,5 +21,4 @@ class Mandaw:
         self.window.onkeypress(turtle.bye, "Escape")
 
     def run(self):
-        self.tick(60)
         self.window.update()
