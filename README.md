@@ -23,6 +23,7 @@ mandaw = Mandaw("title", width = 800, height = 600, bgcolor = "black")
 while True:
     mandaw.run()
 ```
+All the code
 ```py
 from mandaw import *
 
