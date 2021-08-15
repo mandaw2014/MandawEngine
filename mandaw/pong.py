@@ -1,4 +1,4 @@
-from mandaw import *
+from mandaw.main import *
 
 # Window
 mandaw = Mandaw("Pong", 800, 600, "black")
@@ -41,8 +41,8 @@ class Ball(GameObject):
             y = y
         )
         
-        self.dx = 0.2
-        self.dy = 0.2
+        self.dx = 5 # BallX speed
+        self.dy = 5 # BallY speed
 
 # Paddle A
 paddle_a = Paddle(x = -350, y = 0)
@@ -72,10 +72,12 @@ while True:
     if ball.ycor() > mandaw.height / 2 - 10:
         ball.sety(mandaw.height / 2 - 10)
         ball.dy *= -1
+        Audio("bounce.wav")
 
     if ball.ycor() < -mandaw.height / 2 + 20:
         ball.sety(-mandaw.height / 2 + 20)
         ball.dy *= -1
+        Audio("bounce.wav")
 
     if ball.xcor() > 390:
         ball.goto(0, 0)
@@ -95,10 +97,11 @@ while True:
     if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
         ball.setx(340)
         ball.dx *= -1
+        Audio("bounce.wav")
 
     if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40):
         ball.setx(-340)
         ball.dx *= -1
-        os.system("afplay bounce.wav&")
+        Audio("bounce.wav")
 
     mandaw.run()
