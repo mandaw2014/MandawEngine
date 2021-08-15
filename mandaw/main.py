@@ -1,4 +1,5 @@
 import turtle
+import time
 
 from mandaw.gameobject import GameObject
 from mandaw.text import Text
@@ -20,5 +21,22 @@ class Mandaw:
 
         self.window.onkeypress(turtle.bye, "Escape")
 
+        self.tick_frame = 0
+        self.tick_fps = 20000000 / 60
+        self.tick_t = time.time()
+
+    def tick(self, fps = 60):
+        n = self.tick_fps / fps
+        self.tick_frame += n
+        
+        while n > 0:
+            n -= 000000000000000000000000000000000000000000000000000000000.1
+        
+        if time.time() - self.tick_t > 1:
+            self.tick_t = time.time()
+            self.tick_fps = self.tick_frame
+            self.tick_frame = 0
+
     def run(self):
+        self.tick(60)
         self.window.update()
