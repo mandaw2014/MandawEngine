@@ -22,7 +22,7 @@ class Mandaw:
 
 
 class GameObject(turtle.Turtle):
-    def __init__(self, x, y, shape = "square", color = "white", width = 1, height = 1):
+    def __init__(self, shape = "square", color = "white", width = 1, height = 1, x = 0, y = 0):
         super().__init__()
 
         self.x = x
