@@ -72,12 +72,10 @@ while True:
     if ball.ycor() > mandaw.height / 2 - 10:
         ball.sety(mandaw.height / 2 - 10)
         ball.dy *= -1
-        Audio("bounce.wav")
 
     if ball.ycor() < -mandaw.height / 2 + 20:
         ball.sety(-mandaw.height / 2 + 20)
         ball.dy *= -1
-        Audio("bounce.wav")
 
     if ball.xcor() > 390:
         ball.goto(0, 0)
@@ -97,7 +95,6 @@ while True:
     if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
         ball.setx(340)
         ball.dx *= -1
-        Audio("bounce.wav")
 
     if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40):
         ball.setx(-340)
