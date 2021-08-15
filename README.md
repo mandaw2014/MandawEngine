@@ -24,3 +24,7 @@ mandaw = Mandaw("title", width = 800, height = 600, bgcolor = "black")
 while True:
     mandaw.run()
 ```
+Make a simple square
+```py
+square = GameObject(shape = "square", color = "red", width = 1, height = 1)
+```
