@@ -4,7 +4,12 @@ A Game Engine Made in Python with the Pygame Module
 # Installation
 1) Download the zip
 2) Extract the zip
-3) Navigate to the folder in cmd or terminal and type
+3) Navigate to the folder in cmd or terminal and type:
+On Windows:
+```
+python setup.py install
+```
+On Mac and Linux
 ```
 python3 setup.py install
 ```
