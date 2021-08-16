@@ -2,7 +2,7 @@ from mandaw import *
 import random
 
 # General Setup
-mandaw = Mandaw()
+mandaw = Mandaw("Pong")
 
 bg_color = Color("black")
 light_gray = (200, 200, 200)
