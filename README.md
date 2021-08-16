@@ -28,7 +28,7 @@ Make a simple square
 ```py
 from mandaw import *
 
-mandaw = Mandaw("First Mandaw Project")
+mandaw = Mandaw("First Mandaw Game")
 
 square = GameObject(mandaw.window, x = mandaw.width / 2 - 10, y = mandaw.height / 2 - 10, color = "red", width = 20, height = 20)
 
