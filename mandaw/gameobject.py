@@ -1,7 +1,7 @@
 import pygame
 
 class GameObject(pygame.Rect):
-    def __init__(self, window, x = 0, y = 0, color = "white", width = 20, height = 20):
+    def __init__(self, window, width = 20, height = 20, x = 0, y = 0, color = "white"):
         self.x = x
         self.y = y
         self.width = width
