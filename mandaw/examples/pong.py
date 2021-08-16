@@ -10,12 +10,12 @@ light_gray = (200, 200, 200)
 class Paddle(GameObject):
     def __init__(self, x, y):
         super().__init__(
-            mandaw.window,
-            10,
-            140,
-            x,
-            y,
-            light_gray
+            window = mandaw.window,
+            width = 10,
+            height = 140,
+            x = x,
+            y = y,
+            color = light_gray
         )
 
         self.player_pos = mandaw.height / 2 - 70
@@ -43,12 +43,12 @@ class Paddle(GameObject):
 class Ball(GameObject):
     def __init__(self):
         super().__init__(
-            mandaw.window,
-            20,
-            20,
-            mandaw.width / 2 - 15,
-            mandaw.height / 2 - 15,
-            light_gray
+            window = mandaw.window,
+            width = 20,
+            height = 20,
+            x = mandaw.width / 2 - 15,
+            y = mandaw.height / 2 - 15,
+            color = light_gray
         )
 
         self.ball_speed_x = 7 * random.choice((1, -1))
