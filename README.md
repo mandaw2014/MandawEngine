@@ -1,5 +1,5 @@
 # MandawEngine
-A Game Engine Made in Python with the Turtle Module
+A Game Engine Made in Python with the Pygame Module
 
 # Installation
 1) Download the zip
@@ -12,19 +12,28 @@ python3 setup.py install
 # Getting Started
 import Mandaw
 ```py
-from mandaw.main import *
+from mandaw import *
 ```
 
 Make a window
 ```py
-from mandaw.main import *
+from mandaw import *
 
-mandaw = Mandaw("title", width = 800, height = 600, bgcolor = "black")
+mandaw = Mandaw() 
 
 while True:
     mandaw.run()
 ```
 Make a simple square
 ```py
-square = GameObject(shape = "square", color = "red", width = 1, height = 1)
+from mandaw import *
+
+mandaw = Mandaw("First Mandaw Project")
+
+square = GameObject(mandaw.window, x = mandaw.width / 2 - 10, y = mandaw.height / 2 - 10, color = "red", width = 20, height = 20)
+
+while True:
+    square.draw_rect()
+    
+    mandaw.run()
 ```
