@@ -21,8 +21,6 @@ if __name__ == '__main__':
 
     mandaw = Mandaw()
 
-    red = Color("red")
-
     demo = GameObject(window = mandaw.window, width = 20, height = 20, x = mandaw.width / 2 - 10, y = mandaw.height / 2 - 10, color = "red")
 
     while True:
