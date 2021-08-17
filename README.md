@@ -2,7 +2,7 @@
 A Game Engine Made in Python with the Pygame Module
 
 # Installation
-To Install it, type
+To Install, type
 ```
 pip install mandaw
 ```
