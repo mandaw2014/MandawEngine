@@ -32,6 +32,15 @@ while True:
 ```
 Make a simple square
 ```py
+square = GameObject(mandaw.window, x = mandaw.width / 2 - 10, y = mandaw.height / 2 - 10, color = "red", width = 20, height = 20)
+```
+Add it to the scene
+```py
+while True:
+    square.draw_rect()
+```
+### Full Code
+```py
 from mandaw import *
 
 mandaw = Mandaw("First Mandaw Game")
