@@ -2,6 +2,11 @@
 A Game Engine Made in Python with the Pygame Module
 
 # Installation
+To Install it, type
+```
+pip install mandaw
+```
+To Get The Latest Version of MandawEngine:
 1) Download the zip
 2) Extract the zip
 3) Navigate to the folder in cmd or terminal and type:
