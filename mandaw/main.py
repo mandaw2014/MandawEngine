@@ -1,9 +1,7 @@
 import pygame
-import __main__
 
 class Mandaw:
     def __init__(self, title = "Mandaw", width = 800, height = 600, bg_color = "black"):
-
         self.width = width
         self.height = height
         self.title = title
@@ -31,19 +29,16 @@ class Mandaw:
         self.SPACE = pygame.K_SPACE
 
     def run(self):
-        while True:
-            pygame.display.flip()
-            self.clock.tick(60)
+        pygame.display.flip()
+        self.clock.tick(60)
 
-            pygame.display.update()
+        pygame.display.update()
 
-            self.keys = pygame.key.get_pressed()
+        self.keys = pygame.key.get_pressed()
 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
 
-            self.window.fill(self.bg_color)
-            if hasattr(__main__, 'update') and __main__.update:
-                __main__.update()
+        self.window.fill(self.bg_color)
