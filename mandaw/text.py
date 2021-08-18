@@ -1,18 +1,19 @@
-import mandaw.main
-
+import pygame
 
 class Text:
-    def __init__(self, text, window: mandaw.main.Mandaw, font, color, x=0, y=0):
-        self.text = font.render(text, True, color)
+    def __init__(self, window, text, font_size = 24, color = "white", x = 0, y = 0):
         self.window = window
+        self.font_size = font_size
+        self.font = pygame.font.SysFont(None, self.font_size)
+        self.color = color
         self.x = x
         self.y = y
-        self.color = color
-        self.font = font
+
+        self.text = self.font.render(text, True, self.color)
 
     def draw(self):
         self.window.window.blit(self.text, (self.x, self.y))
 
-    def change_text(self, text):
-        self.text = self.font.render(text, True, self.color)
-
+    def center(self):
+        self.x = self.window.width / 2 - self.font_size / 2
+        self.y = self.window.height / 2 - self.font_size / 2
