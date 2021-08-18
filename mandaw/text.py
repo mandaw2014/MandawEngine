@@ -1,10 +1,11 @@
 import pygame
 
 class Text:
-    def __init__(self, window, text, font_size = 24, color = "white", x = 0, y = 0):
+    def __init__(self, window, text, font_size = 24, style = None, color = "white", x = 0, y = 0):
         self.window = window
         self.font_size = font_size
-        self.font = pygame.font.SysFont(None, self.font_size)
+        self.style = style
+        self.font = pygame.font.SysFont(self.style, self.font_size)
         self.color = color
         self.x = x
         self.y = y
