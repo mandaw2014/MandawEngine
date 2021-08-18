@@ -12,7 +12,7 @@ class GameObject(pygame.Rect):
         self.color = color
 
     def draw(self):
-        if self.shape == "rect" or self.shape == "rectangle" or self.shape == "square":
+        if self.shape == "rect" or self.shape == "rectangle":
             pygame.draw.rect(self.window.window, self.color, self)
         
         elif self.shape == "ellipse" or self.shape == "circle":
