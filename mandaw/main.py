@@ -2,7 +2,6 @@ import pygame
 
 class Mandaw:
     def __init__(self, title = "Mandaw", width = 800, height = 600, bg_color = "black"):
-        super().__init__()
 
         self.width = width
         self.height = height
