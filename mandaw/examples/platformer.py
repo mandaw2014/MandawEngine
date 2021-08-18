@@ -4,7 +4,7 @@ from mandaw import *
 mandaw = Mandaw("Platformer", bg_color = "cyan")
 
 # Ground
-ground = GameObject(mandaw.window, 1000, 100, mandaw.width / 2 - 500, 500, "gray")
+ground = GameObject(mandaw, 1000, 100, mandaw.width / 2 - 500, 500, "gray")
 
 objects = []
 
@@ -12,7 +12,7 @@ objects = []
 class PlatformerController(GameObject):
     def __init__(self):
         super().__init__(
-            mandaw.window,
+            mandaw,
             30,
             70,
             mandaw.width / 2 - 15,
@@ -47,7 +47,7 @@ class PlatformerController(GameObject):
 class Platform(GameObject):
     def __init__(self, x, y):
         super().__init__(
-            mandaw.window,
+            mandaw,
             100,
             20,
             x,
