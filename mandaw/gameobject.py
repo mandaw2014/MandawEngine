@@ -15,7 +15,7 @@ class GameObject(pygame.Rect):
         if self.shape == "rect" or self.shape == "rectangle":
             pygame.draw.rect(self.window.window, self.color, self)
         
-        elif self.shape == "ellipse":
+        elif self.shape == "ellipse" or self.shape == "circle":
             pygame.draw.ellipse(self.window.window, self.color, self)
     
     def center(self):
