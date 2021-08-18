@@ -1,20 +1,22 @@
 import pygame
 
 class GameObject(pygame.Rect):
-    def __init__(self, window, width = 20, height = 20, x = 0, y = 0, color = "white"):
+    def __init__(self, window, shape = "rect", width = 20, height = 20, x = 0, y = 0, color = "white"):
         self.x = x
         self.y = y
+        self.shape = shape
         self.width = width
         self.height = height
 
         self.window = window
         self.color = color
 
-    def draw_rect(self):
-        pygame.draw.rect(self.window.window, self.color, self)
-
-    def draw_ellipse(self):
-        pygame.draw.ellipse(self.window.window, self.color, self)
+    def draw(self):
+        if self.shape == "rect" or self.shape == "rectangle":
+            pygame.draw.rect(self.window.window, self.color, self)
+        
+        elif self.shape == "ellipse":
+            pygame.draw.ellipse(self.window.window, self.color, self)
     
     def center(self):
         self.x = self.window.width / 2 - self.width / 2
@@ -25,9 +27,9 @@ if __name__ == "__main__":
 
     mandaw = Mandaw()
 
-    demo = GameObject(mandaw, width = 20, height = 20, x = 0, y = 0, color = "red")
+    demo = GameObject(mandaw, shape = "ellipse", width = 20, height = 20, x = 0, y = 0, color = "red")
     demo.center()
 
     while True:
-        demo.draw_rect()
+        demo.draw()
         mandaw.run()

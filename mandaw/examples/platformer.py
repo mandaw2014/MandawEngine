@@ -4,7 +4,7 @@ from mandaw import *
 mandaw = Mandaw("Platformer", bg_color = "cyan")
 
 # Ground
-ground = GameObject(mandaw, 1000, 100, mandaw.width / 2 - 500, 500, "gray")
+ground = GameObject(mandaw, "rect", 1000, 100, mandaw.width / 2 - 500, 500, "gray")
 
 objects = []
 
@@ -13,6 +13,7 @@ class PlatformerController(GameObject):
     def __init__(self):
         super().__init__(
             mandaw,
+            "rect",
             30,
             70,
             mandaw.width / 2 - 15,
@@ -48,6 +49,7 @@ class Platform(GameObject):
     def __init__(self, x, y):
         super().__init__(
             mandaw,
+            "rect",
             100,
             20,
             x,
@@ -87,16 +89,16 @@ while True:
         player.jump()
 
     # Draw the ground and player
-    ground.draw_rect()
-    player.draw_rect()
-    platform.draw_rect()
-    platform1.draw_rect()
-    platform2.draw_rect()
-    platform3.draw_rect()
-    platform4.draw_rect()
-    platform5.draw_rect()
-    platform6.draw_rect()
-    platform7.draw_rect()
+    ground.draw()
+    player.draw()
+    platform.draw()
+    platform1.draw()
+    platform2.draw()
+    platform3.draw()
+    platform4.draw()
+    platform5.draw()
+    platform6.draw()
+    platform7.draw()
 
     # Run the program
     mandaw.run()

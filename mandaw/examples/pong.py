@@ -11,6 +11,7 @@ class Paddle(GameObject):
     def __init__(self, x, y):
         super().__init__(
             window = mandaw,
+            shape = "rect",
             width = 10,
             height = 140,
             x = x,
@@ -44,6 +45,7 @@ class Ball(GameObject):
     def __init__(self):
         super().__init__(
             window = mandaw,
+            shape = "ellipse",
             width = 20,
             height = 20,
             x = mandaw.width / 2 - 15,
@@ -98,9 +100,9 @@ while True:
 
     # Visuals
     mandaw.window.fill(bg_color)
-    player.draw_rect()
-    opponent.draw_rect()
-    ball.draw_ellipse()
+    player.draw()
+    opponent.draw()
+    ball.draw()
 
     line = Line(mandaw, light_gray, (mandaw.width / 2, 0), (mandaw.width / 2, mandaw.height))
 
