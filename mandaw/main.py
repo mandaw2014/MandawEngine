@@ -16,18 +16,6 @@ class Mandaw:
 
         self.keys = pygame.key.get_pressed()
 
-        self.UP = pygame.K_UP
-        self.DOWN = pygame.K_DOWN
-        self.LEFT = pygame.K_LEFT
-        self.RIGHT = pygame.K_RIGHT
-        
-        self.W = pygame.K_w
-        self.A = pygame.K_a
-        self.S = pygame.K_s
-        self.D = pygame.K_d
-
-        self.SPACE = pygame.K_SPACE
-
     def run(self):
         pygame.display.flip()
         self.clock.tick(60)
