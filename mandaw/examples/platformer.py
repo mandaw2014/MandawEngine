@@ -9,6 +9,8 @@ ground = GameObject(mandaw, shape = "rect", width = 5000, height = 100, x = mand
 # Objects list
 objects = []
 
+input = Input()
+
 # Player
 class PlatformerController(GameObject):
     def __init__(self):
@@ -35,9 +37,9 @@ class PlatformerController(GameObject):
 
     def movement(self):
         # Player movement
-        if mandaw.keys[mandaw.A]:
+        if mandaw.keys[input.A]:
             self.pos -= 1 * self.speed
-        if mandaw.keys[mandaw.D]:
+        if mandaw.keys[input.D]:
             self.pos += 1 * self.speed
 
         # Gravity
@@ -65,7 +67,7 @@ class PlatformerController(GameObject):
 
     def jump(self):
         # Jumping
-        if self.is_jumping == False and mandaw.keys[mandaw.SPACE]:
+        if self.is_jumping == False and mandaw.keys[input.SPACE]:
             self.is_jumping = True
             if not self.collidelistall(objects):
                 self.is_jumping = False
