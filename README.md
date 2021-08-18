@@ -32,8 +32,8 @@ from mandaw import *
 
 mandaw = Mandaw() 
 
-while True:
-    mandaw.run()
+mandaw.run()
+    
 ```
 Make a simple square
 ```py
@@ -41,8 +41,8 @@ square = GameObject(mandaw, x = mandaw.width / 2 - 10, y = mandaw.height / 2 - 1
 ```
 Draw it
 ```py
-while True:
-    square.draw_rect()
+def update():
+    square.draw()
 ```
 # Full Code
 ```py
@@ -52,8 +52,8 @@ mandaw = Mandaw("First Mandaw Game")
 
 square = GameObject(mandaw, x = mandaw.width / 2 - 10, y = mandaw.height / 2 - 10, color = "red", width = 20, height = 20)
 
-while True:
+def update():
     square.draw_rect()
     
-    mandaw.run()
+mandaw.run()
 ```
