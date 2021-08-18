@@ -81,12 +81,14 @@ opponent = Paddle(10, mandaw.height / 2 - 70)
 
 speed = 7
 
+input = Input()
+
 while True:
     # Handling inputs
-    if mandaw.keys[mandaw.UP]:
+    if mandaw.keys[input.UP]:
         player.player_pos -= speed
 
-    if mandaw.keys[mandaw.DOWN]:
+    if mandaw.keys[input.DOWN]:
         player.player_pos += speed
 
     # Ball movement
