@@ -61,3 +61,47 @@ while True:
     square.draw()
     mandaw.run()
 ```
+# Collisions Between GameObjects
+What we have so far
+```py
+from mandaw import *
+
+mandaw = Mandaw("Collisions!", bg_color = "cyan")
+
+square = GameObject(mandaw, "rect", x = 0, y = 0, color = "orange", width = 20, height = 30)
+square.center()
+
+ground = GameObject(mandaw, "rect", x = 0, y = 0, color = "gray", width = 5000, height = 100)
+ground.center()
+ground.y = 500
+
+while True:
+    square.draw()
+    ground.draw()   
+
+    mandaw.run()
+```
+Here We Can Use The `collide()` Function. For example, We're Going To Make Gravity Here
+```py
+from mandaw import *
+
+mandaw = Mandaw("Collisions!", bg_color = "cyan")
+
+square = GameObject(mandaw, "rect", x = 0, y = 0, color = "orange", width = 20, height = 30)
+square.center()
+
+ground = GameObject(mandaw, "rect", x = 0, y = 0, color = "gray", width = 5000, height = 100)
+ground.center()
+ground.y = 500
+
+while True:
+    # Collision code here
+    if not square.collide(ground):
+        # Square's y position -= 150 x deltaTime
+        square.y += 150 * mandaw.dt 
+
+    square.draw()
+    ground.draw()   
+
+    mandaw.run()
+```
