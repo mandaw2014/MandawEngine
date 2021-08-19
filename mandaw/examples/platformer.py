@@ -177,8 +177,7 @@ while True:
     # Call the player functions
     player.movement()
 
-    if mandaw.controls.is_key_pressed(mandaw.keys["SPACE"]):
-        player.jump()
+    player.jump()
 
     # Draw the ground and player
     player.draw()
