@@ -10,3 +10,4 @@ mandaw.set_fps(60)
 while True:
     print(mandaw.get_fps())
     mandaw.run()
+
