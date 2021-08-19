@@ -9,3 +9,4 @@ from mandaw.sprite import Sprite
 from mandaw.text import Text
 from mandaw.input import Controls
 from mandaw.audio import Audio
+from mandaw.animation import Animation
