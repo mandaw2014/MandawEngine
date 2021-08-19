@@ -78,6 +78,7 @@ class Mandaw:
         pygame.display.flip()
         self.clock.tick(self.fps)
 
+
         pygame.display.update()
 
         self.controls.update()
@@ -88,3 +89,8 @@ class Mandaw:
                 quit()
 
         self.window.fill(self.bg_color)
+    def get_fps(self):
+        return self.clock.get_fps()
+
+    def set_fps(self, fps):
+        self.fps = fps
