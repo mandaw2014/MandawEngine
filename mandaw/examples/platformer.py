@@ -41,23 +41,23 @@ class PlatformerController(GameObject):
             self.pos += 100 * self.speed * mandaw.dt
 
         # Gravity
-        if not self.collidelistall(objects) and self.is_jumping == False:
+        if not self.collide(objects) and self.is_jumping == False:
             self.y += 3 * self.velocity_y
             self.velocity_y += 0.1
-        if self.collidelistall(objects):
+        if self.collide(objects):
             self.velocity_y = 1
             self.speed = 2
 
         # Platform collisions
-        if self.colliderect(platform7):
+        if self.collide(platform7):
             self.jump_y = 20
-        if self.colliderect(platform10):
+        if self.collide(platform10):
             self.jump_y = 20
-        if self.colliderect(platform12):
+        if self.collide(platform12):
             self.speed = 6
-        if self.colliderect(platform13):
+        if self.collide(platform13):
             self.speed = 6
-        if self.colliderect(platform14):
+        if self.collide(platform14):
             self.speed = 6
 
         # Set the x position as the x variable
@@ -67,7 +67,7 @@ class PlatformerController(GameObject):
         # Jumping
         if self.is_jumping == False and mandaw.controls.is_key_pressed(mandaw.keys["SPACE"]):
             self.is_jumping = True
-            if not self.collidelistall(objects):
+            if not self.collide(objects):
                 self.is_jumping = False
 
         if self.is_jumping == True:
@@ -176,8 +176,9 @@ objects.append(finishBlock)
 while True:
     # Call the player functions
     player.movement()
-
     player.jump()
+
+    print(mandaw.fps)
 
     # Draw the ground and player
     player.draw()
