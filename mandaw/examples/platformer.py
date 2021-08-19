@@ -28,9 +28,9 @@ class PlatformerController(GameObject):
 
     def movement(self):
         # Player movement
-        if mandaw.keys[mandaw.A]:
+        if mandaw.controls.is_key_pressed(mandaw.keys["A"]):
             self.pos -= 1 * self.speed
-        if mandaw.keys[mandaw.D]:
+        if mandaw.controls.is_key_pressed(mandaw.keys["D"]):
             self.pos += 1 * self.speed
 
         # Gravity
@@ -85,7 +85,7 @@ while True:
     # Call the player functions
     player.movement()
 
-    if mandaw.keys[mandaw.SPACE]:
+    if mandaw.controls.is_key_pressed(mandaw.keys["SPACE"]):
         player.jump()
 
     # Draw the ground and player
