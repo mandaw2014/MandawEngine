@@ -1,12 +1,7 @@
-from typing import Union, Tuple, List
-
 import pygame
 
-import mandaw
-
-
 class Sprite:
-    def __init__(self, window, image, x, y, size: Union[Tuple[int, int], List[int], None] = None):
+    def __init__(self, window, image, x, y, size = (200, 200)):
         self.animations = {}
         self.image = pygame.image.load(image)
         if size is not None:
@@ -26,7 +21,11 @@ class Sprite:
     def get_height(self):
         return self.image.get_height()
 
-    def resize(self, size: Union[Tuple[int, int], List[int]]):
+    def center(self):
+        self.x = self.window.width / 2 - self.size[0]
+        self.y = self.window.height / 2 - self.size[1]
+
+    def resize(self, size):
         self.image = pygame.transform.scale(self.image, size)
 
     def add_animation(self, animation, name):
