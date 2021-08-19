@@ -2,11 +2,12 @@ import pygame
 from mandaw.input import Controls
 
 class Mandaw:
-    def __init__(self, title = "Mandaw", width = 800, height = 600, bg_color = "black"):
+    def __init__(self, title = "Mandaw", width = 800, height = 600, bg_color = "black", fps=60):
         self.width = width
         self.height = height
         self.title = title
         self.bg_color = bg_color
+        self.fps = fps
 
         pygame.init()
         self.clock = pygame.time.Clock()
@@ -75,7 +76,7 @@ class Mandaw:
 
     def run(self):
         pygame.display.flip()
-        self.clock.tick(60)
+        self.clock.tick(self.fps)
 
         pygame.display.update()
 
