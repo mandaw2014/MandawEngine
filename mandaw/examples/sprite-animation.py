@@ -11,14 +11,16 @@ run_anim = Animation("assets/normal-run", 0.14)
 character.add_animation(animation, "idle")
 character.add_animation(run_anim, "run")
 
+speed = 5
+
 while True:
     character.draw()
     if mandaw.controls.is_key_pressed(mandaw.keys["D"]):
         character.play_animation("run")
-        character.x += 5
+        character.x += 80 * speed * mandaw.dt
     elif mandaw.controls.is_key_pressed(mandaw.keys["A"]):
         character.play_animation("run", "x")
-        character.x -= 5
+        character.x -= 80 * speed * mandaw.dt
     else:
         character.play_animation("idle")
 
