@@ -37,7 +37,11 @@ while True:
 ```
 Make a simple square
 ```py
-square = GameObject(mandaw, "rect", x = mandaw.width / 2 - 10, y = mandaw.height / 2 - 10, color = "red", width = 20, height = 20)
+square = GameObject(mandaw, "rect", x = 0, y = 0, color = "red", width = 20, height = 20)
+```
+Center it with
+```py
+square.center()
 ```
 Draw it
 ```py
@@ -50,7 +54,8 @@ from mandaw import *
 
 mandaw = Mandaw("First Mandaw Game")
 
-square = GameObject(mandaw, "rect", x = mandaw.width / 2 - 10, y = mandaw.height / 2 - 10, color = "red", width = 20, height = 20)
+square = GameObject(mandaw, "rect", x = 0, y = 0, color = "red", width = 20, height = 20)
+square.center()
 
 while True:
     square.draw()
