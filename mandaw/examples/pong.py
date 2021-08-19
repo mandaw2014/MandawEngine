@@ -1,111 +1,206 @@
 from mandaw import *
-import random
 
-# General Setup
-mandaw = Mandaw("Pong")
+# Window
+mandaw = Mandaw("Platformer", bg_color = "cyan")
 
-bg_color = Color("black")
-light_gray = (200, 200, 200)
+# Ground
+ground = GameObject(mandaw, shape = "rect", width = 5000, height = 100, x = mandaw.width / 2 - 500, y = 500, color = "gray")
 
-class Paddle(GameObject):
+# Objects list
+objects = []
+
+input = Input()
+
+# Player
+class PlatformerController(GameObject):
+    def __init__(self):
+        super().__init__(
+            window = mandaw,
+            shape = "rect",
+            width = 15,
+            height = 35,
+            color = "orange",
+        )
+
+        self.center()
+        self.y = mandaw.height / 2 + 150
+        
+        # Player Speed
+        self.speed = 3
+        # Set the position as a variable
+        self.pos = mandaw.width / 2 - self.width
+
+        self.is_jumping = False
+        self.jump_y = 12
+
+        self.velocity_y = 1
+
+    def movement(self):
+        # Player movement
+        if mandaw.keys[mandaw.A]:
+            self.pos -= 1 * self.speed
+        if mandaw.keys[mandaw.D]:
+            self.pos += 1 * self.speed
+
+        # Gravity
+        if not self.collidelistall(objects) and self.is_jumping == False:
+            self.y += 3 * self.velocity_y
+            self.velocity_y += 0.1
+        if self.collidelistall(objects):
+            self.velocity_y = 1
+            self.speed = 3
+
+        # Platform collisions
+        if self.colliderect(platform7):
+            self.jump_y = 20
+        if self.colliderect(platform10):
+            self.jump_y = 20
+        if self.colliderect(platform12):
+            self.speed = 6
+        if self.colliderect(platform13):
+            self.speed = 6
+        if self.colliderect(platform14):
+            self.speed = 6
+
+        # Set the x position as the x variable
+        self.x = self.pos
+
+    def jump(self):
+        # Jumping
+        if self.is_jumping == False and mandaw.keys[input.SPACE]:
+            self.is_jumping = True
+            if not self.collidelistall(objects):
+                self.is_jumping = False
+
+        if self.is_jumping == True:
+            self.y -= self.jump_y
+            self.jump_y -= 1
+
+            if self.jump_y < -5:
+                self.is_jumping = False
+                self.jump_y = 10
+
+class Platform(GameObject):
     def __init__(self, x, y):
         super().__init__(
             window = mandaw,
             shape = "rect",
-            width = 10,
-            height = 140,
+            width = 50,
+            height = 10,
             x = x,
             y = y,
-            color = light_gray
+            color = "green"
         )
 
-        self.player_pos = mandaw.height / 2 - 70
-        self.opponent_speed = 7
-
-    def player_movement(self):
-        self.y = self.player_pos
-
-        if self.top <= 0:
-            self.top = 0
-        if self.bottom >= mandaw.height:
-            self.bottom = mandaw.height
-
-    def opponent_movement(self):
-        if self.top < ball.y:
-            self.top += self.opponent_speed
-        if self.bottom > ball.y:
-            self.bottom -= self.opponent_speed
-
-        if self.top <= 0:
-            self.top = 0
-        if self.bottom >= mandaw.height:
-            self.bottom = mandaw.height
-
-class Ball(GameObject):
-    def __init__(self):
+class JumpPlatform(GameObject):
+    def __init__(self, x, y):
         super().__init__(
             window = mandaw,
-            shape = "ellipse",
-            width = 20,
-            height = 20,
-            x = mandaw.width / 2 - 15,
-            y = mandaw.height / 2 - 15,
-            color = light_gray
+            shape = "rect",
+            width = 50,
+            height = 10,
+            x = x,
+            y = y,
+            color = "orange"
         )
 
-        self.ball_speed_x = 7 * random.choice((1, -1))
-        self.ball_speed_y = 7 * random.choice((1, -1))
+class SpeedPlatform(GameObject):
+    def __init__(self, x, y):
+        super().__init__(
+            window = mandaw,
+            shape = "rect",
+            width = 100,
+            height = 10,
+            x = x,
+            y = y,
+            color = "blue"
+        )
 
-    def ball_movement(self):
-        # Animate the ball
-        self.x += self.ball_speed_x
-        self.y += self.ball_speed_y
+class FinishBlock(GameObject):
+    def __init__(self, x, y):
+        super().__init__(
+            mandaw,
+            shape = "rect",
+            width = 50,
+            height = 10,
+            x = x,
+            y = y,
+            color = "yellow"
+        )
 
-        # Collisions
-        if self.top <= 0 or self.bottom >= mandaw.height:
-            self.ball_speed_y *= -1
-        if self.left <= 0 or self.right >= mandaw.width:
-            self.ball_reset()
+# Call the player
+player = PlatformerController()
 
-        if self.colliderect(player) or self.colliderect(opponent):
-            self.ball_speed_x *= -1
+center_x = mandaw.width / 2
+center_y = mandaw.height / 2
 
-    def ball_reset(self):
-        self.center()
-        self.ball_speed_y *= random.choice((1, -1))
-        self.ball_speed_x *= random.choice((1, -1))
+# Platforms
+platform = Platform(center_x - 200, center_y + 170)
+platform1 = Platform(center_x - 280, center_y + 140)
+platform2 = Platform(center_x - 360, center_y + 110)
+platform3 = Platform(center_x - 280, center_y + 80)
+platform4 = Platform(center_x - 200, center_y + 50)
+platform5 = Platform(center_x - 120, center_y + 20)
 
-ball = Ball()
-player = Paddle(mandaw.width - 20, mandaw.height / 2 - 70)
-opponent = Paddle(10, mandaw.height / 2 - 70)
+platform6 = Platform(center_x - 40, center_y - 10)
+platform7 = JumpPlatform(center_x + 40, center_y + 100)
+platform8 = Platform(center_x + 120, center_y - 40)
+platform9 = Platform(center_x + 220, center_y - 40)
+platform10 = JumpPlatform(center_x + 320, center_y - 40)
 
-speed = 7
+platform11 = Platform(center_x + 220, center_y - 220)
+platform12 = SpeedPlatform(center_x + 80, center_y - 220)
+platform13 = SpeedPlatform(center_x + -120, center_y - 220)
+platform14 = SpeedPlatform(center_x + -320, center_y - 220)
 
-input = Input()
+finishBlock = FinishBlock(center_x + -400, center_y - 220)
 
+# Add platforms to the object list
+objects.append(ground)
+objects.append(platform)
+objects.append(platform1)
+objects.append(platform2)
+objects.append(platform3)
+objects.append(platform4)
+objects.append(platform5)
+objects.append(platform6)
+objects.append(platform7)
+objects.append(platform8)
+objects.append(platform9)
+objects.append(platform10)
+objects.append(platform11)
+objects.append(platform12)
+objects.append(platform13)
+objects.append(platform14)
+objects.append(finishBlock)
+
+# Main Game Loop
 while True:
-    # Handling inputs
-    if mandaw.keys[input.UP]:
-        player.player_pos -= speed
+    # Call the player functions
+    player.movement()
 
-    if mandaw.keys[input.DOWN]:
-        player.player_pos += speed
+    player.jump()
 
-    # Ball movement
-    ball.ball_movement()
-    
-    # Player movement
-    player.player_movement()
-
-    # Opponent movement
-    opponent.opponent_movement()
-
-    # Visuals
-    mandaw.window.fill(bg_color)
+    # Draw the ground and player
     player.draw()
-    opponent.draw()
-    ball.draw()
+    ground.draw()
+    platform.draw()
+    platform1.draw()
+    platform2.draw()
+    platform3.draw()
+    platform4.draw()
+    platform5.draw()
+    platform6.draw()
+    platform7.draw()
+    platform8.draw()
+    platform9.draw()
+    platform10.draw()
+    platform11.draw()
+    platform12.draw()
+    platform13.draw()
+    platform14.draw()
 
-    line = Line(mandaw, light_gray, (mandaw.width / 2, 0), (mandaw.width / 2, mandaw.height))
+    finishBlock.draw()
 
+    # Run the program
     mandaw.run()
