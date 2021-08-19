@@ -24,7 +24,7 @@ class PlatformerController(GameObject):
         self.y = mandaw.height / 2 + 150
         
         # Player Speed
-        self.speed = 3
+        self.speed = 2
         # Set the position as a variable
         self.pos = mandaw.width / 2 - self.width
 
@@ -36,9 +36,9 @@ class PlatformerController(GameObject):
     def movement(self):
         # Player movement
         if mandaw.controls.is_key_pressed(mandaw.keys["A"]):
-            self.pos -= 1 * self.speed
+            self.pos -= 100 * self.speed * mandaw.dt
         if mandaw.controls.is_key_pressed(mandaw.keys["D"]):
-            self.pos += 1 * self.speed
+            self.pos += 100 * self.speed * mandaw.dt
 
         # Gravity
         if not self.collidelistall(objects) and self.is_jumping == False:
@@ -46,7 +46,7 @@ class PlatformerController(GameObject):
             self.velocity_y += 0.1
         if self.collidelistall(objects):
             self.velocity_y = 1
-            self.speed = 3
+            self.speed = 2
 
         # Platform collisions
         if self.colliderect(platform7):
