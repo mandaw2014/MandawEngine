@@ -7,6 +7,11 @@ mandaw = Mandaw("Pong")
 bg_color = Color("black")
 light_gray = (200, 200, 200)
 
+score1 = 0
+score2 = 0
+
+
+
 class Paddle(GameObject):
     def __init__(self, x, y):
         super().__init__(
@@ -57,6 +62,8 @@ class Ball(GameObject):
         self.ball_speed_y = 7 * random.choice((1, -1))
 
     def ball_movement(self):
+        global score1
+        global score2
         # Animate the ball
         self.x += self.ball_speed_x
         self.y += self.ball_speed_y
@@ -64,8 +71,12 @@ class Ball(GameObject):
         # Collisions
         if self.top <= 0 or self.bottom >= mandaw.height:
             self.ball_speed_y *= -1
-        if self.left <= 0 or self.right >= mandaw.width:
+        if self.left <= 0:
             self.ball_reset()
+            score2 += 1
+        elif self.right >= mandaw.width:
+            self.ball_reset()
+            score1 += 1
 
         if self.colliderect(player) or self.colliderect(opponent):
             self.ball_speed_x *= -1
@@ -82,6 +93,7 @@ opponent = Paddle(10, mandaw.height / 2 - 70)
 speed = 7
 
 while True:
+
     # Handling inputs
     if mandaw.controls.is_key_pressed(mandaw.keys["UP"]):
         player.player_pos -= speed
@@ -103,6 +115,11 @@ while True:
     player.draw()
     opponent.draw()
     ball.draw()
+    score1_text = Text(mandaw, str(score1), 24, None, "white", 10)
+    score2_text = Text(mandaw, str(score2), 24, None, "white", mandaw.width - 20)
+    score1_text.draw()
+    score2_text.draw()
+
 
     line = Line(mandaw, light_gray, (mandaw.width / 2, 0), (mandaw.width / 2, mandaw.height))
 
