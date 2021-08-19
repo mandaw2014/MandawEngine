@@ -21,6 +21,12 @@ class GameObject(pygame.Rect):
     def center(self):
         self.x = self.window.width / 2 - self.width / 2
         self.y = self.window.height / 2 - self.height / 2
+    
+    def center_x(self):
+        self.x = self.window.width / 2 - self.width / 2
+
+    def center_y(self):
+        self.y = self.window.height / 2 - self.height / 2
 
     def collide(self, rect):
         if type(rect) != list:
