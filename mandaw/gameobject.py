@@ -22,6 +22,14 @@ class GameObject(pygame.Rect):
         self.x = self.window.width / 2 - self.width / 2
         self.y = self.window.height / 2 - self.height / 2
 
+    def collide(self, rect):
+        if type(rect) != list:
+            return self.colliderect(rect)
+        elif type(rect) == list:
+            return self.collidelistall(rect)
+        else:
+            print("MandawError: sorry but when you typed collide(object), the object wasnt a string or a list. see you soon :)")
+
 if __name__ == "__main__":
     from mandaw import *
 
