@@ -10,8 +10,6 @@ light_gray = (200, 200, 200)
 score1 = 0
 score2 = 0
 
-
-
 class Paddle(GameObject):
     def __init__(self, x, y):
         super().__init__(
@@ -65,8 +63,8 @@ class Ball(GameObject):
         global score1
         global score2
         # Animate the ball
-        self.x += self.ball_speed_x
-        self.y += self.ball_speed_y
+        self.x += 70 * self.ball_speed_x * mandaw.dt
+        self.y += 70 * self.ball_speed_y * mandaw.dt
 
         # Collisions
         if self.top <= 0 or self.bottom >= mandaw.height:
@@ -93,13 +91,12 @@ opponent = Paddle(10, mandaw.height / 2 - 70)
 speed = 7
 
 while True:
-
     # Handling inputs
     if mandaw.controls.is_key_pressed(mandaw.keys["UP"]):
-        player.player_pos -= speed
+        player.player_pos -= 100 * speed * mandaw.dt
 
     if mandaw.controls.is_key_pressed(mandaw.keys["DOWN"]):
-        player.player_pos += speed
+        player.player_pos += 100 * speed * mandaw.dt
 
     # Ball movement
     ball.ball_movement()
