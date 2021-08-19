@@ -37,9 +37,9 @@ class PlatformerController(GameObject):
 
     def movement(self):
         # Player movement
-        if mandaw.keys[input.A]:
+        if mandaw.keys[mandaw.A]:
             self.pos -= 1 * self.speed
-        if mandaw.keys[input.D]:
+        if mandaw.keys[mandaw.D]:
             self.pos += 1 * self.speed
 
         # Gravity
