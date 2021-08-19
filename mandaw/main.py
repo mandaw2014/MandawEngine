@@ -7,9 +7,13 @@ class Mandaw:
         self.height = height
         self.title = title
         self.bg_color = bg_color
+        self.fps = 60
+        self.done = False
 
         pygame.init()
         self.clock = pygame.time.Clock()
+
+        self.dt = 0
 
         self.window = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption(self.title)
@@ -79,10 +83,13 @@ class Mandaw:
 
         pygame.display.update()
 
+        self.dt = self.clock.tick(self.fps) / 1000
+
         self.controls.update()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                self.done = True
                 pygame.quit()
                 quit()
 
