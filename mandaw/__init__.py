@@ -7,3 +7,5 @@ from mandaw.line import Line
 from mandaw.color import Color
 from mandaw.sprite import Sprite
 from mandaw.text import Text
+from mandaw.input import Input
+from mandaw.audio import Audio
