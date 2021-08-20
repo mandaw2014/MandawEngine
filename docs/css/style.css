@@ -1,0 +1,67 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto Mono', monospace;
+}
+
+#slogan {
+    position: relative;
+    text-align: center;
+    z-index: -4;
+    font-size: 50px;
+    top: 200px;
+}
+
+#bg {
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: -70px;
+    z-index: -5;
+}
+
+#install {
+    text-align: center;
+    position: relative;
+    top: 50px;
+}
+
+.code_block {
+    text-align: center;
+    position: relative;
+}
+
+purple {
+    color: hsl(289.0, 50%, 50%);
+}
+
+gray {
+    color: rgb(119, 119, 119);
+}
+
+orange {
+    color: rgba(255, 115, 0, 0.699);
+}
+
+green {
+    color: rgb(152, 255, 56);
+}
+
+blue {
+    color: rgb(3, 61, 253);
+}
+
+yellow {
+    color: rgb(219, 186, 0);
+}
+
+@media screen and (max-width: 630px) {
+    #bg {
+        top: -130px;
+    }
+    #slogan {
+        top: 60px;
+    }
+}
