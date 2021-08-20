@@ -27,10 +27,10 @@ class Sprite:
         self.x = self.window.width / 2 - self.size[0]
         self.y = self.window.height / 2 - self.size[1]
 
-    def centerx(self):
+    def center_x(self):
         self.x = self.window.width / 2 - self.size[0]
 
-    def centery(self):
+    def center_y(self):
         self.y = self.window.height / 2 - self.size[1]
 
     def collide(self, rect):
