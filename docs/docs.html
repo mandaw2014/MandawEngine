@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation</title>
+    <link rel="stylesheet" href="./css/docs.css">
+    <link rel="stylesheet" href="./css/nav.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <input type="checkbox" id="check" />
+            <label for="check" class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </label>
+            <a href="index.html" class="logo">MandawEngine</a>
+            <ul class="navlinks">
+                <li><a href="#">Documentation</a></li>
+                <li><a href="https://github.com/mandaw2014/MandawEngine/tree/master/mandaw/examples" class="contact">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1 style="top: 100px;">Mandaw</h1>
+
+    <div class="docs" style="top: 150px;">
+        <gray>title</gray> = <orange>"Mandaw"</orange><br>
+        <gray>width</gray> = <green>800</green><br>
+        <gray>height</gray> = <green>600</green><br>
+        <gray>bg_color</gray> = <orange>"black"</orange><br><br>
+        <gray>fps</gray> = <green>60</green><br>
+        <gray>keys</gray> = [] <br>
+        <gray>controls</gray> = <darkgreen>Controls</darkgreen>() <br><br>
+        <yellow>run</yellow>(<gray>self</gray>) <br><br><br><br>
+
+        <div class="code_block">
+            <darkgreen>Mandaw</darkgreen>(<gray>title</gray>, <gray>width</gray>, <gray>height</gray>, <gray>bg_color</gray>) <br><br>
+        </div>
+    </div>
+
+    <h1 style="top: 350px;">GameObject</h1>
+
+    <div class="docs" style="top: 400px;">
+        <gray>window</gray> = <blue>None</blue><br>
+        <gray>shape</gray> = <orange>"rect"</orange><br>
+        <gray>width</gray> = <green>20</green><br>
+        <gray>height</gray> = <green>20</green><br>
+        <gray>x</gray> = <green>0</green><br>
+        <gray>y</gray> = <green>0</green><br>
+        <gray>color</gray> = <orange>"white"</orange><br><br>
+        <yellow>draw</yellow>(<gray>self</gray>) <br>
+        <yellow>center</yellow>(<gray>self</gray>) <br>
+        <yellow>center_x</yellow>(<gray>self</gray>) <br>
+        <yellow>center_y</yellow>(<gray>self</gray>) <br>
+        <yellow>collide</yellow>(<gray>self</gray>, <gray>rect</gray>) <br><br><br><br>
+
+        <div class="code_block">
+            <darkgreen>GameObject</darkgreen>(<gray>window</gray>, <gray>shape</gray>, <gray>width</gray>, <gray>height</gray>, <gray>x</gray>, <gray>y</gray>, <gray>color</gray>) <br><br>
+        </div>
+    </div>
+
+    <h1 style="top: 600px;">Input</h1>
+    <h2 style="text-align: center; position: relative; top: 650px;">Controls</h2>
+
+    <div class="docs" style="top: 700px;">
+        <gray>pressed</gray> = <darkgreen>pygame</darkgreen>.<gray>key</gray>.<yellow>get_pressed</yellow>() <br><br>
+
+        <yellow>update</yellow>(<gray>self</gray>) <br>
+        <yellow>is_key_pressed</yellow>(<gray>self</gray>, <gray>key</gray>) <br><br><br><br>
+        
+        <div class="code_block">
+            <darkgreen>Controls</darkgreen>() <br><br>
+        </div>
+    </div>
+
+    <h1 style="top: 900px;">Sprite</h1>
+
+    <div class="docs" style="top: 950px;">
+        <gray>window</gray> = <blue>None</blue><br>
+        <gray>image</gray> = <blue>None</blue><br>
+        <gray>x</gray> = <green>0</green><br>
+        <gray>y</gray> = <green>0</green><br>
+        <gray>size</gray> = (<green>200</green>, <green>200</green>) <br>
+        <gray>animations</gray> = {} <br>
+        <gray>rect</gray> = <darkgreen>pygame</darkgreen>.<yellow>Rect</yellow>(<gray>x</gray>, <gray>y</gray>, <gray>size</gray>[<green>0</green>], <gray>size</gray>[<green>1</green>]) <br><br>
+
+        <yellow>draw</yellow>(<gray>self</gray>) <br>
+        <yellow>get_width</yellow>(<gray>self</gray>) <br>
+        <yellow>get_height</yellow>(<gray>self</gray>) <br>
+        <yellow>center</yellow>(<gray>self</gray>) <br>
+        <yellow>center_x</yellow>(<gray>self</gray>) <br>
+        <yellow>center_y</yellow>(<gray>self</gray>) <br>
+        <yellow>collide</yellow>(<gray>self</gray>, <gray>rect</gray>) <br>
+        <yellow>resize</yellow>(<gray>self</gray>, <gray>size</gray>) <br>
+        <yellow>add_animation</yellow>(<gray>self</gray>, <gray>animation</gray>, <gray>name</gray>) <br>
+        <yellow>play_animation</yellow>(<gray>self</gray>, <gray>name</gray>, <gray>mirror</gray> = <blue>None</blue>) <br><br><br><br>
+    
+        <div class="code_block">
+            <darkgreen>Sprite</darkgreen>(<gray>window</gray>, <gray>image</gray>, <gray>x</gray>, <gray>y</gray>, <gray>size</gray>)
+        </div>
+    </div>
+
+    <h1 style="top: 1150px;">Animation</h1>
+
+    <div class="docs" style="top: 1200px;">
+        <gray>anim_folder</gray> = <blue>None</blue> <br>
+        <gray>anim_time</gray> = <blue>None</blue><br>
+        <gray>frames</gray> = [] <br>
+        <gray>count</gray> = <darkgreen>len</darkgreen>(<gray>frames</gray>) <br><br><br><br>
+        
+        <div class="code_block">
+            <darkgreen>Animation</darkgreen>(<gray>anim_folder</gray>, <gray>anim_time</gray>)
+        </div>
+    </div>
+
+    <h1 style="top: 1400px;">Color</h1>
+
+    <div class="docs" style="top: 1450px;">
+        <gray>color</gray> = <blue>None</blue> <br><br><br><br>
+
+        <div class="code_block">
+            <darkgreen>Color</darkgreen>(<gray>color</gray>)
+        </div>
+    </div>
+
+    <h1 style="top: 1650px;">Text</h1>
+
+    <div class="docs" style="top: 1700px;">
+        <gray>window</gray> = <blue>None</blue><br>
+        <gray>text</gray> = <blue>None</blue><br>
+        <gray>font_size</gray> = <green>24</green><br>
+        <gray>style</gray> = <blue>None</blue><br>
+        <gray>color</gray> = <orange>"white"</orange><br>
+        <gray>x</gray> = <green>0</green><br>
+        <gray>y</gray> = <green>0</green><br>
+        <gray>font</gray> = <darkgreen>pygame</darkgreen>.<gray>font</gray>.<yellow>SysFont</yellow>(<gray>style</gray>, <gray>font_size</gray>) <br>
+        <gray>text</gray> = <gray>font</gray>.<yellow>render</yellow>(<gray>text</gray>, <blue>True</blue>, <gray>color</gray>) <br><br>
+        <yellow>draw</yellow>(<gray>self</gray>) <br>
+        <yellow>center</yellow>(<gray>self</gray>) <br><br><br><br>
+
+        <div class="code_block">
+            <darkgreen>Text</darkgreen>(<gray>window</gray>, <gray>text</gray>, <gray>font_size</gray>, <gray>style</gray>, <gray>color</gray> <gray>x</gray>, <gray>y</gray>)
+        </div>
+    </div>
+
+    <h1 style="top: 1900px;">Audio</h1>
+
+    <div class="docs" style="top: 1950px;">
+        <gray>file</gray> = <blue>None</blue> <br>
+        <gray>volume</gray> = <blue>None</blue> <br><br>
+        <yellow>play</yellow>(<gray>self</gray>) <br>
+        <yellow>pause</yellow>(<gray>self</gray>) <br>
+        <yellow>resume</yellow>(<gray>self</gray>) <br>
+        <yellow>stop</yellow>(<gray>self</gray>) <br><br><br><br>
+
+        <div class="code_block">
+            <darkgreen>Audio</darkgreen>(<gray>file</gray>, <gray>volume</gray>)
+        </div>
+    </div>
+
+    <h1 style="top: 2150px;">Line</h1>
+
+    <div class="docs" style="top: 2200px">
+        <gray>window</gray> = <blue>None</blue><br>
+        <gray>color</gray> = <blue>None</blue><br>
+        <gray>start_pos</gray> = <blue>None</blue><br>
+        <gray>end_pos</gray> = <blue>None</blue><br><br><br><br>
+
+        <div class="code_block">
+            <darkgreen>Line</darkgreen>(<gray>window</gray>, <gray>color</gray>, <gray>start_pos</gray>, <gray>end_pos</gray>)
+        </div>
+    </div>
+
+    <h1 style="top: 2400px;">Light</h1>
+
+    <div class="docs" style="top: 2450px;">
+        <gray>window</gray> = <blue>None</blue><br>
+        <gray>mask_img</gray> = <blue>None</blue><br><br>
+
+        <yellow>light_init</yellow>(<gray>self</gray>, <gray>pos</gray>) <br>
+        <yellow>draw</yellow>(<gray>self</gray>) <br><br><br><br>
+
+        <div class="code_block">
+            <darkgreen>Light</darkgreen>(<gray>window</gray>, <gray>mask_img</gray>)
+        </div>
+    </div>
+
+    <div style="position: relative; top: 2600px;">.</div>
+</body>
+</html>
