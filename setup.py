@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='Mandaw',
-      version='1.0.7',
+      version='1.0.8',
       description='A Game Engine Made In Python',
       author='mandaw2014',
       keywords="python 2d game development",
