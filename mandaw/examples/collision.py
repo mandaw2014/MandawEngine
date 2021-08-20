@@ -9,10 +9,15 @@ ground = GameObject(window = mandaw, shape = "rect", width = 5000, height = 100,
 ground.center()
 ground.y = 500
 
+sprite = Sprite(mandaw, "assets/adventurer.png", 10, 10, (100, 50))
+
 while True: 
     if not square.collide(ground):
         square.y += 150 * mandaw.dt
+    if not sprite.collide(ground):
+        sprite.y += 150 * mandaw.dt
 
     square.draw()
     ground.draw()
+    sprite.draw()
     mandaw.run()
