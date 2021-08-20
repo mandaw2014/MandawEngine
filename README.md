@@ -1,6 +1,8 @@
 # MandawEngine
 A Game Engine Made in Python with the Pygame Module
 
+Discord: https://discord.gg/MPPqj9PNt3
+
 # Installation
 To Install, type
 ```
