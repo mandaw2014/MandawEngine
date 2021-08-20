@@ -7,13 +7,15 @@ class Sprite:
         if size is not None:
             self.image = pygame.transform.scale(self.image, size)
         self.window = window
-
         self.x = x
         self.y = y
         self.size = size
+        self.rect = pygame.Rect(0, 0, 0, 0)
 
     def draw(self):
+        self.rect = pygame.Rect(self.x, self.y, self.size[0], self.size[1])
         self.window.window.blit(self.image, (self.x, self.y))
+
 
     def get_width(self):
         return self.image.get_width()
@@ -24,6 +26,21 @@ class Sprite:
     def center(self):
         self.x = self.window.width / 2 - self.size[0]
         self.y = self.window.height / 2 - self.size[1]
+
+    def centerx(self):
+        self.x = self.window.width / 2 - self.size[0]
+
+    def centery(self):
+        self.y = self.window.height / 2 - self.size[1]
+
+    def collide(self, rect):
+        if type(rect) != list:
+            return self.rect.colliderect(rect)
+        elif type(rect) == list:
+            return self.rect.collidelistall(rect)
+        else:
+            print("MandawError: sorry but when you typed collide(object), the object wasnt a string or a list. see "
+                  "you soon :)")
 
     def resize(self, size):
         self.image = pygame.transform.scale(self.image, size)
