@@ -1,3 +1,4 @@
+import time
 import pygame
 from mandaw.input import Controls
 
@@ -13,6 +14,7 @@ class Mandaw:
         pygame.init()
         self.clock = pygame.time.Clock()
 
+        self.last_time = time.time()
         self.dt = 0
 
         self.window = pygame.display.set_mode((self.width, self.height))
@@ -83,7 +85,9 @@ class Mandaw:
 
         pygame.display.update()
 
-        self.dt = self.clock.tick(self.fps) / 1000
+        self.dt = time.time() - self.last_time
+        self.dt *= 60
+        self.last_time = time.time()
 
         self.controls.update()
 
