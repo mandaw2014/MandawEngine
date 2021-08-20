@@ -1,0 +1,51 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto Mono', monospace;
+    text-decoration: none;
+}
+
+.docs {
+    text-align: center;
+    position: relative;
+    font-size: 20px;
+}
+
+h1 {
+    text-align: center;
+    position: relative;
+    font-size: 50px;
+}
+
+.code_block {
+    text-align: center;
+    position: relative;
+}
+
+purple {
+    color: hsl(289.0, 50%, 50%);
+}
+
+gray {
+    color: rgb(119, 119, 119);
+}
+
+orange {
+    color: rgba(255, 115, 0, 0.699);
+}
+
+green {
+    color: rgb(152, 255, 56);
+}
+
+darkgreen {
+    color: rgb(128, 182, 1);
+}
+
+blue {
+    color: rgb(3, 61, 253);
+}
+
+yellow {
+    color: rgb(219, 186, 0);
+}
