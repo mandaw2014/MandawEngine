@@ -65,7 +65,58 @@
     <div class="code_block" style="top: 650px;">
         <purple>while</purple> <blue>True</blue>: mandaw.<yellow>run</yellow>()
     </div>
+
+    <h2 style="text-align: center; position: relative; top: 700px;">Making A Square</h2>
+    <h3 style="text-align: center; position: relative; top: 750px;">Declare the Square With GameObject</h3>
+
+    <div class="code_block" style="top: 800px;">
+        square = GameObject(<gray>window</gray> = mandaw, <gray>shape</gray> = <orange>"rect"</orange>, <gray>width</gray> = <green>20</green>, <gray>height</gray> = <green>20</green>, <gray>x</gray> = <green>0</green>, <gray>y</gray> = <green>0</green>, <gray>color</gray> = <orange>"white"</orange>)
+    </div>
+
+    <h3 style="text-align: center; position: relative; top: 850px;">Then to Center it, write</h3>
+
+    <div class="code_block" style="top: 900px;">
+        square.<yellow>center</yellow>()
+    </div>
+
+    <h3 style="text-align: center; position: relative; top: 950px;">Then in the <purple>while</purple> <blue>True</blue>: loop, write</h3>
     
-    <div style="position: relative; top: 700px;">.</div>
+    <div class="code_block" style="top: 1000px;">
+        square.<yellow>draw</yellow>()
+    </div>
+
+    <h2 style="text-align: center; position: relative; top: 1050px;">Collisions Between GameObjects</h2>
+    <h3 style="text-align: center; position: relative; top: 1100px;">Make A Ground</h3>
+
+    <div class="code_block" style="top: 1150px;">
+        ground = GameObject(<gray>window</gray> = mandaw, <gray>shape</gray> = <orange>"rect"</orange>, <gray>width</gray> = <green>5000</green>, <gray>height</gray> = <green>100</green>, <gray>x</gray> = <green>0</green>, <gray>y</gray> = <green>0</green>, <gray>color</gray> = <orange>"gray"</orange>)
+    </div>
+
+    <h3 style="text-align: center; position: relative; top: 1200px;">Center It</h3>
+
+    <div class="code_block" style="top: 1250px;">
+        ground.<yellow>center</yellow>()  <br>
+        ground.<gray>y</gray> = <green>500</green>
+    </div>
+
+    <h3 style="text-align: center; position: relative; top: 1300px;">Draw it in the <purple>while</purple> <blue>True</blue>: loop</h3>
+
+    <div class="code_block" style="top: 1350px;">
+        ground.<yellow>draw</yellow>()
+    </div>
+
+    <h3 style="text-align: center; position: relative; top: 1400px;">Here we can use the <yellow>collide</yellow>() function</h3>
+
+    <div class="code_block" style="top: 1450px;">
+        <gray># Square's y position -= 150 x deltaTime</gray> <br>
+        <purple>if</purple> <blue>not</blue> square.<yellow>collide</yellow>(ground): <br> square.<gray>y</gray> += <green>150</green> * mandaw.<gray>dt</gray>
+    </div>
+
+    <div style="text-align: center; position: relative; top: 1500px;">
+        <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/examples/collision.py">Full Code</a>
+    </div>
+
+    <div style="position: relative; top: 1600px;">.</div>
 </body>
+<script src="./script.js"></script>
 </html>
