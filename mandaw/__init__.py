@@ -11,3 +11,4 @@ from mandaw.input import Controls
 from mandaw.audio import Audio
 from mandaw.animation import Animation
 from mandaw.light import Light
+from mandaw.particle import ParticleSpawner
