@@ -14,7 +14,8 @@ class Mandaw:
         pygame.init()
         self.clock = pygame.time.Clock()
 
-        self.dt = self.clock.tick(self.fps) / 1000
+        self.last_time = time.time()
+        self.dt = 0
 
         self.window = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption(self.title)
@@ -84,7 +85,9 @@ class Mandaw:
 
         pygame.display.update()
 
-        self.dt = self.clock.tick(self.fps) / 1000
+        self.dt = time.time() - self.last_time
+        self.dt *= 60
+        self.last_time = time.time()
 
         self.controls.update()
 
