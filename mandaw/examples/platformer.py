@@ -23,42 +23,86 @@ class PlatformerController(GameObject):
         self.center()
         self.y = mandaw.height / 2 + 150
         
-        # Player Speed
-        self.speed = 2
+        # Player's X Position
+        self.pos_x = 0
+
         # Set the position as a variable
         self.pos = mandaw.width / 2 - self.width
 
         self.is_jumping = False
         self.jump_y = 12
 
+        self.direction = None
+
         self.velocity_y = 1
+
+        # Player's speed and maxspeed
+        self.speed = 10
+        self.maxspeed = 5
 
     def movement(self):
         # Player movement
         if mandaw.controls.is_key_pressed(mandaw.keys["A"]):
-            self.pos -= 100 * self.speed * mandaw.dt
+            self.pos_x -= self.speed * mandaw.dt
+            self.direction = 0
+
         if mandaw.controls.is_key_pressed(mandaw.keys["D"]):
-            self.pos += 100 * self.speed * mandaw.dt
+            self.pos_x += self.speed * mandaw.dt
+            self.direction = 1
+
+        # Momentum
+        if self.pos_x >= self.maxspeed:
+            self.pos_x = self.maxspeed
+        if self.pos_x <= -self.maxspeed:
+            self.pos_x = -self.maxspeed
+
+        self.pos += self.pos_x
 
         # Gravity
         if not self.collide(objects) and self.is_jumping == False:
             self.y += 3 * self.velocity_y
             self.velocity_y += 0.1
+
         if self.collide(objects):
             self.velocity_y = 1
-            self.speed = 2
+            self.maxspeed = 5
 
+            if self.direction == 0 and not mandaw.controls.is_key_pressed(mandaw.keys["A"]):
+                self.pos_x += 0.8
+
+                if self.pos_x >= 0:
+                    self.pos_x = 0
+            
+            if self.direction == 1 and not mandaw.controls.is_key_pressed(mandaw.keys["D"]):
+                self.pos_x -= 0.8
+
+                if self.pos_x <= 0:
+                    self.pos_x = 0
+
+        if not self.collide(objects):
+            if self.direction == 0 and not mandaw.controls.is_key_pressed(mandaw.keys["A"]):
+                self.pos_x += 0.1
+
+                if self.pos_x >= 0:
+                    self.pos_x = 0
+            
+            if self.direction == 1 and not mandaw.controls.is_key_pressed(mandaw.keys["D"]):
+                self.pos_x -= 0.1
+
+                if self.pos_x <= 0:
+                    self.pos_x = 0
+            
         # Platform collisions
         if self.collide(platform7):
             self.jump_y = 20
         if self.collide(platform10):
             self.jump_y = 20
         if self.collide(platform12):
-            self.speed = 6
+            self.maxspeed = 10
         if self.collide(platform13):
-            self.speed = 6
+            self.maxspeed = 10
         if self.collide(platform14):
-            self.speed = 6
+            self.maxspeed = 10
 
         # Set the x position as the x variable
         self.x = self.pos
