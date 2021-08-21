@@ -37,8 +37,8 @@ class PlatformerController(GameObject):
         self.velocity_y = 1
 
         # Player's speed and maxspeed
-        self.speed = 50
-        self.maxspeed = 5
+        self.speed = 1
+        self.maxspeed = 3
 
     def movement(self):
         # Player movement
@@ -60,8 +60,8 @@ class PlatformerController(GameObject):
 
         # Gravity
         if not self.collide(objects) and self.is_jumping == False:
-            self.y += 200 * self.velocity_y * mandaw.dt
-            self.velocity_y += 5 * mandaw.dt
+            self.y += 3 * self.velocity_y
+            self.velocity_y += 0.1
 
         if self.collide(objects):
             self.velocity_y = 1
