@@ -37,8 +37,8 @@ class PlatformerController(GameObject):
         self.velocity_y = 1
 
         # Player's speed and maxspeed
-        self.speed = 10
-        self.maxspeed = 5
+        self.speed = 50
+        self.maxspeed = 3
 
     def movement(self):
         # Player movement
@@ -65,7 +65,7 @@ class PlatformerController(GameObject):
 
         if self.collide(objects):
             self.velocity_y = 1
-            self.maxspeed = 5
+            self.maxspeed = 3
 
             if self.direction == 0 and not mandaw.controls.is_key_pressed(mandaw.keys["A"]):
                 self.pos_x += 0.8
@@ -98,11 +98,11 @@ class PlatformerController(GameObject):
         if self.collide(platform10):
             self.jump_y = 20
         if self.collide(platform12):
-            self.maxspeed = 10
+            self.maxspeed = 8
         if self.collide(platform13):
-            self.maxspeed = 10
+            self.maxspeed = 8
         if self.collide(platform14):
-            self.maxspeed = 10
+            self.maxspeed = 8
 
         # Set the x position as the x variable
         self.x = self.pos
@@ -221,8 +221,6 @@ while True:
     # Call the player functions
     player.movement()
     player.jump()
-
-    print(mandaw.fps)
 
     # Draw the ground and player
     player.draw()
