@@ -63,8 +63,8 @@ class Ball(GameObject):
         global score1
         global score2
         # Animate the ball
-        self.x += 70 * self.ball_speed_x * mandaw.dt
-        self.y += 70 * self.ball_speed_y * mandaw.dt
+        self.x += 1 * self.ball_speed_x * mandaw.dt
+        self.y += 1 * self.ball_speed_y * mandaw.dt
 
         # Collisions
         if self.top <= 0 or self.bottom >= mandaw.height:
@@ -93,10 +93,10 @@ speed = 7
 while True:
     # Handling inputs
     if mandaw.controls.is_key_pressed(mandaw.keys["UP"]):
-        player.player_pos -= 100 * speed * mandaw.dt
+        player.player_pos -= 1 * speed * mandaw.dt
 
     if mandaw.controls.is_key_pressed(mandaw.keys["DOWN"]):
-        player.player_pos += 100 * speed * mandaw.dt
+        player.player_pos += 1 * speed * mandaw.dt
 
     # Ball movement
     ball.ball_movement()

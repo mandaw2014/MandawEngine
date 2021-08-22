@@ -99,8 +99,8 @@ ground.y = 500
 while True:
     # Collision code here
     if not square.collide(ground):
-        # Square's y position -= 150 x deltaTime
-        square.y += 150 * mandaw.dt 
+        # Square's y position += 1 x deltaTime
+        square.y += 1 * mandaw.dt 
 
     square.draw()
     ground.draw()   
