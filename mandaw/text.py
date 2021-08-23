@@ -18,3 +18,15 @@ class Text:
     def center(self):
         self.x = self.window.width / 2 - self.font_size / 2
         self.y = self.window.height / 2 - self.font_size / 2
+       
+if __name__ == '__main__':
+    from mandaw import *
+
+    mandaw = Mandaw("Mandaw", bg_color="cyan")
+
+    text = Text(mandaw, "Mandaw", 50)
+    text.center()
+
+    while True:
+        text.draw()
+        mandaw.run()
