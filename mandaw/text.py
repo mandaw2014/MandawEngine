@@ -1,11 +1,11 @@
 import pygame
 
 class Text:
-    def __init__(self, window, text, font_size = 24, style = None, color = "white", x = 0, y = 0):
+    def __init__(self, window, text, font_size = 24, file = None, color = "white", x = 0, y = 0):
         self.window = window
         self.font_size = font_size
-        self.style = style
-        self.font = pygame.font.SysFont(self.style, self.font_size)
+        self.file = file
+        self.font = pygame.font.Font(self.file, self.font_size)
         self.color = color
         self.x = x
         self.y = y
@@ -18,7 +18,7 @@ class Text:
     def center(self):
         self.x = self.window.width / 2 - self.font_size / 2
         self.y = self.window.height / 2 - self.font_size / 2
-       
+
 if __name__ == '__main__':
     from mandaw import *
 
