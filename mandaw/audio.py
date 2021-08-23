@@ -4,11 +4,11 @@ class Audio:
     def __init__(self, file, volume):
         self.volume = volume
 
-        mixer.Sound(file)
-        mixer.Sound.set_volume(self.volume)
+        self.audio = mixer.Sound(file)
+        self.audio.set_volume(self.volume)
 
     def play(self):
-        mixer.Sound.play()
+        self.audio.play()
 
     def stop(self):
-        mixer.Sound.stop()
+        self.audio.stop()
