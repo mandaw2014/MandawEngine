@@ -22,4 +22,15 @@ class Light:
         self.light_filter.blit(self.light_mask, pos)
     def draw(self):
         self.window.window.blit(self.light_filter, (0, 0), special_flags=pygame.BLEND_RGBA_SUB)
+        
+if __name__ == '__main__':
+    from mandaw import *
+
+    mandaw = Mandaw(bg_color="red")
+    light = Light(mandaw, "assets/circle.png")
+    light.light_init((100, 100))
+
+    while True:
+        light.draw()
+        mandaw.run()
 
