@@ -1,6 +1,7 @@
 import time
 import pygame
 from mandaw.input import Controls
+from mandaw.sprite import Sprite
 
 class Mandaw:
     def __init__(self, title = "Mandaw", width = 800, height = 600, bg_color = "black"):
@@ -8,6 +9,7 @@ class Mandaw:
         self.height = height
         self.title = title
         self.bg_color = bg_color
+        self.background = None
         self.fps = 60
         self.done = False
 
@@ -98,3 +100,6 @@ class Mandaw:
                 quit()
 
         self.window.fill(self.bg_color)
+
+        if self.background != None:
+            self.background.draw()
