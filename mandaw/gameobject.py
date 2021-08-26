@@ -19,8 +19,8 @@ class GameObject(pygame.Rect):
             pygame.draw.ellipse(self.window.window, self.color, self)
     
     def center(self):
-        self.x = self.window.width / 2 - self.width / 2
-        self.y = self.window.height / 2 - self.height / 2
+        self.center_x()
+        self.center_y()
     
     def center_x(self):
         self.x = self.window.width / 2 - self.width / 2
