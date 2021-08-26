@@ -1,7 +1,6 @@
 import time
 import pygame
 from mandaw.input import Controls
-from mandaw.sprite import Sprite
 
 class Mandaw:
     def __init__(self, title = "Mandaw", width = 800, height = 600, bg_color = "black"):
