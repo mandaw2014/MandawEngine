@@ -4,7 +4,7 @@ from mandaw import *
 mandaw = Mandaw("Platformer", bg_color = "cyan")
 
 # Ground
-ground = GameObject(mandaw, shape = "rect", width = 5000, height = 100, x = mandaw.width / 2 - 500, y = 500, color = "gray")
+ground = GameObject(mandaw, shape = "rect", size = (5000, 100), x = mandaw.width / 2 - 500, y = 500, color = "gray")
 
 # Objects list
 objects = []
@@ -15,8 +15,7 @@ class PlatformerController(GameObject):
         super().__init__(
             window = mandaw,
             shape = "rect",
-            width = 15,
-            height = 35,
+            size = (15, 35),
             color = "orange",
         )
 
@@ -42,11 +41,11 @@ class PlatformerController(GameObject):
 
     def movement(self):
         # Player movement
-        if mandaw.controls.is_key_pressed(mandaw.keys["A"]):
+        if mandaw.input.get_key_pressed(mandaw.keys["A"]):
             self.pos_x -= self.speed * mandaw.dt
             self.direction = 0
 
-        if mandaw.controls.is_key_pressed(mandaw.keys["D"]):
+        if mandaw.input.get_key_pressed(mandaw.keys["D"]):
             self.pos_x += self.speed * mandaw.dt
             self.direction = 1
 
@@ -67,26 +66,26 @@ class PlatformerController(GameObject):
             self.velocity_y = 1
             self.maxspeed = 3
 
-            if self.direction == 0 and not mandaw.controls.is_key_pressed(mandaw.keys["A"]):
+            if self.direction == 0 and not mandaw.input.get_key_pressed(mandaw.keys["A"]):
                 self.pos_x += 10 * mandaw.dt
 
                 if self.pos_x >= 0:
                     self.pos_x = 0
             
-            if self.direction == 1 and not mandaw.controls.is_key_pressed(mandaw.keys["D"]):
+            if self.direction == 1 and not mandaw.input.get_key_pressed(mandaw.keys["D"]):
                 self.pos_x -= 10 * mandaw.dt
 
                 if self.pos_x <= 0:
                     self.pos_x = 0
 
         if not self.collide(objects):
-            if self.direction == 0 and not mandaw.controls.is_key_pressed(mandaw.keys["A"]):
+            if self.direction == 0 and not mandaw.input.get_key_pressed(mandaw.keys["A"]):
                 self.pos_x += 0.1
 
                 if self.pos_x >= 0:
                     self.pos_x = 0
             
-            if self.direction == 1 and not mandaw.controls.is_key_pressed(mandaw.keys["D"]):
+            if self.direction == 1 and not mandaw.input.get_key_pressed(mandaw.keys["D"]):
                 self.pos_x -= 0.1
 
                 if self.pos_x <= 0:
@@ -109,7 +108,7 @@ class PlatformerController(GameObject):
 
     def jump(self):
         # Jumping
-        if self.is_jumping == False and mandaw.controls.is_key_pressed(mandaw.keys["SPACE"]):
+        if self.is_jumping == False and mandaw.input.get_key_pressed(mandaw.keys["SPACE"]):
             self.is_jumping = True
             if not self.collide(objects):
                 self.is_jumping = False
@@ -127,8 +126,7 @@ class Platform(GameObject):
         super().__init__(
             window = mandaw,
             shape = "rect",
-            width = 50,
-            height = 10,
+            size = (50, 10),
             x = x,
             y = y,
             color = "green"
@@ -139,8 +137,7 @@ class JumpPlatform(GameObject):
         super().__init__(
             window = mandaw,
             shape = "rect",
-            width = 50,
-            height = 10,
+            size = (50, 10),
             x = x,
             y = y,
             color = "orange"
@@ -151,8 +148,7 @@ class SpeedPlatform(GameObject):
         super().__init__(
             window = mandaw,
             shape = "rect",
-            width = 100,
-            height = 10,
+            size = (100, 10),
             x = x,
             y = y,
             color = "blue"
@@ -163,8 +159,7 @@ class FinishBlock(GameObject):
         super().__init__(
             mandaw,
             shape = "rect",
-            width = 50,
-            height = 10,
+            size = (50, 10),
             x = x,
             y = y,
             color = "yellow"
