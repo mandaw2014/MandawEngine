@@ -1,15 +1,17 @@
 import pygame
 
 class GameObject(pygame.Rect):
-    def __init__(self, window, shape = "rect", width = 20, height = 20, x = 0, y = 0, color = "white"):
+    def __init__(self, window, shape = "rect", size = (20, 20), x = 0, y = 0, color = "white"):
         self.x = x
         self.y = y
         self.shape = shape
-        self.width = width
-        self.height = height
+        self.width = size[0]
+        self.height = size[1]
 
         self.window = window
         self.color = color
+
+        self.size = size
 
     def draw(self):
         if self.shape == "rect" or self.shape == "rectangle":
@@ -19,8 +21,8 @@ class GameObject(pygame.Rect):
             pygame.draw.ellipse(self.window.window, self.color, self)
     
     def center(self):
-        self.center_x()
-        self.center_y()
+        self.x = self.window.width / 2 - self.width / 2
+        self.y = self.window.height / 2 - self.height / 2
     
     def center_x(self):
         self.x = self.window.width / 2 - self.width / 2
