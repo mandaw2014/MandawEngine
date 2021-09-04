@@ -1,11 +1,19 @@
 import pygame
+from sys import platform
 
 class Text:
     def __init__(self, window, text, font_size = 24, file = None, color = "white", x = 0, y = 0):
         self.window = window
         self.font_size = font_size
         self.file = file
-        self.font = pygame.font.Font(self.file, self.font_size)
+
+        if platform == "linux" or platform == "linux2":
+            self.font = pygame.font.SysFont(self.file, self.font_size)
+        if platform == "darwin":
+            self.font = pygame.font.Font(self.file, self.font_size)
+        if platform == "win32":
+            self.font = pygame.font.SysFont(self.file, self.font_size)
+
         self.color = color
         self.x = x
         self.y = y
