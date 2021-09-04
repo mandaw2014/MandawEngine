@@ -107,3 +107,27 @@ while True:
 
     mandaw.run()
 ```
+
+# Platformer Controller Prefab
+What we have so far
+```py
+from mandaw import *
+
+mandaw = Mandaw("Platformer Example", bg_color = "cyan")
+
+while True:
+    mandaw.run()
+```
+Import the PlatformerController2D with
+```py
+from mandaw.prefabs.platformer_controller import PlatformerController2D
+```
+Then call it
+```py
+player = PlatformerController2D(mandaw, x = 0, y = 0, centered = True)
+```
+Then in the ```py while True:``` loop, call
+```py
+while True:
+    player.movement()
+``` 
