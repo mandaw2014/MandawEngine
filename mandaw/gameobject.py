@@ -2,14 +2,16 @@ import pygame
 
 class GameObject(pygame.Rect):
     def __init__(self, window, shape = "rect", size = (20, 20), x = 0, y = 0, color = "white"):
-        self.x = x
-        self.y = y
         self.shape = shape
         self.width = size[0]
         self.height = size[1]
 
         self.window = window
         self.color = color
+
+        self.position = (x, y)
+        self.x = self.position[0]
+        self.y = self.position[1]
 
         self.size = size
 
