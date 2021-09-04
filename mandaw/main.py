@@ -1,6 +1,6 @@
 import time
 import pygame
-from mandaw.input import Controls
+from mandaw.input import Input
 
 class Mandaw:
     def __init__(self, title = "Mandaw", width = 800, height = 600, bg_color = "black"):
@@ -22,7 +22,7 @@ class Mandaw:
         pygame.display.set_caption(self.title)
         self.window.fill(self.bg_color)
 
-        self.controls = Controls()
+        self.input = Input()
 
         self.keys = {
             "UP":pygame.K_UP, "DOWN":pygame.K_DOWN,
@@ -77,7 +77,11 @@ class Mandaw:
 
             "HOME":pygame.K_HOME, "INSERT":pygame.K_INSERT,
             "DELETE":pygame.K_DELETE, "RETURN":pygame.K_RETURN,
-            "SPACE":pygame.K_SPACE, "PLUS":pygame.K_PLUS
+            "SPACE":pygame.K_SPACE, "PLUS":pygame.K_PLUS,
+        }
+
+        self.mouse_buttons = {
+            "LEFT":0, "MIDDLE":1, "RIGHT":2
         }
 
     def run(self):
@@ -90,7 +94,7 @@ class Mandaw:
         self.dt *= 60
         self.last_time = time.time()
 
-        self.controls.update()
+        self.input.update()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
