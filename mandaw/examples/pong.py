@@ -92,10 +92,10 @@ speed = 7
 
 while True:
     # Handling inputs
-    if mandaw.controls.is_key_pressed(mandaw.keys["UP"]):
+    if mandaw.input.get_key_pressed(mandaw.keys["UP"]):
         player.player_pos -= 1 * speed * mandaw.dt
 
-    if mandaw.controls.is_key_pressed(mandaw.keys["DOWN"]):
+    if mandaw.input.get_key_pressed(mandaw.keys["DOWN"]):
         player.player_pos += 1 * speed * mandaw.dt
 
     # Ball movement
