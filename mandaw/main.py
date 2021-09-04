@@ -23,8 +23,8 @@ class Mandaw:
         self.window = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption(self.title)
         path = os.path.dirname(os.path.abspath(__file__))
-        mandaw_icon = os.path.join(path, "./assets/mandaw.png")
-        image = pygame.image.load(mandaw_icon)
+        self.icon = os.path.join(path, "./assets/mandaw.png")
+        image = pygame.image.load(self.icon)
         pygame.display.set_icon(image)
         self.window.fill(self.bg_color)
 
