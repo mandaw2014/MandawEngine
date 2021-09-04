@@ -1,6 +1,8 @@
+from mandaw.input import Input
+from mandaw.sprite import Sprite
+import os
 import time
 import pygame
-from mandaw.input import Input
 
 class Mandaw:
     def __init__(self, title = "Mandaw", width = 800, height = 600, bg_color = "black"):
@@ -20,6 +22,10 @@ class Mandaw:
 
         self.window = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption(self.title)
+        path = os.path.dirname(os.path.abspath(__file__))
+        mandaw_icon = os.path.join(path, "./assets/mandaw.png")
+        image = pygame.image.load(mandaw_icon)
+        pygame.display.set_icon(image)
         self.window.fill(self.bg_color)
 
         self.input = Input()
