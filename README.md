@@ -126,7 +126,7 @@ Then call it
 ```py
 player = PlatformerController2D(mandaw, x = 0, y = 0, centered = True)
 ```
-Then in the ```py while True:``` loop, call
+Then in the ```while True:``` loop, call
 ```py
 while True:
     player.movement()
