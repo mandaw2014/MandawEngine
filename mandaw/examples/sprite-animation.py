@@ -15,11 +15,11 @@ speed = 5
 
 while True:
     character.draw()
-    if mandaw.controls.is_key_pressed(mandaw.keys["D"]):
+    if mandaw.input.get_key_pressed(mandaw.keys["D"]):
         character.play_animation("run")
         character.x += 1 * speed * mandaw.dt
 
-    elif mandaw.controls.is_key_pressed(mandaw.keys["A"]):
+    elif mandaw.input.get_key_pressed(mandaw.keys["A"]):
         character.play_animation("run", "x")
         character.x -= 1 * speed * mandaw.dt
 
