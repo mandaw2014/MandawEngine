@@ -1,8 +1,5 @@
 from mandaw.input import Input
-from mandaw.sprite import Sprite
-import os
-import time
-import pygame
+import os, time, sys, pygame
 
 class Mandaw:
     def __init__(self, title = "Mandaw", width = 800, height = 600, bg_color = "black"):
@@ -107,6 +104,9 @@ class Mandaw:
                 self.done = True
                 pygame.quit()
                 quit()
+
+        if self.input.get_key_pressed(self.keys["F5"]):
+            os.execl(sys.executable, sys.executable, *sys.argv)
 
         self.window.fill(self.bg_color)
 
