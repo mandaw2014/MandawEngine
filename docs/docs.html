@@ -41,9 +41,11 @@
         <gray>width</gray> = <green>800</green><br>
         <gray>height</gray> = <green>600</green><br>
         <gray>bg_color</gray> = <orange>"black"</orange><br><br>
+        <lightgray># Background sprite</lightgray><br>
+        <gray>background</gray> = <gray>type</gray>: <blue>FileType</blue><br><br>
         <gray>fps</gray> = <green>60</green><br>
         <gray>keys</gray> = [] <br>
-        <gray>controls</gray> = <darkgreen>Controls</darkgreen>() <br><br>
+        <gray>input</gray> = <darkgreen>Input</darkgreen>() <br><br>
         <yellow>run</yellow>(<gray>self</gray>) <br><br><br><br>
 
         <div class="code_block">
@@ -58,21 +60,22 @@
     </div>
 
     <div class="docs" style="top: 400px;">
-        <gray>window</gray> = <blue>None</blue><br>
+        <gray>window</gray> = <gray>type</gray>: <darkgreen>Mandaw</darkgreen><br>
         <gray>shape</gray> = <orange>"rect"</orange><br>
-        <gray>width</gray> = <green>20</green><br>
-        <gray>height</gray> = <green>20</green><br>
+        <gray>size</gray> = (<green>20</green>, <green>20</green>)<br>
         <gray>x</gray> = <green>0</green><br>
         <gray>y</gray> = <green>0</green><br>
         <gray>color</gray> = <orange>"white"</orange><br><br>
         <yellow>draw</yellow>(<gray>self</gray>) <br>
         <yellow>center</yellow>(<gray>self</gray>) <br>
         <yellow>center_x</yellow>(<gray>self</gray>) <br>
-        <yellow>center_y</yellow>(<gray>self</gray>) <br>
+        <yellow>center_y</yellow>(<gray>self</gray>) <br><br>
+
+        <lightgray># Can be a <green>GameObject</green> or a <green>List</green> of <green>GameObjects</green></lightgray><br>
         <yellow>collide</yellow>(<gray>self</gray>, <gray>rect</gray>) <br><br><br><br>
 
         <div class="code_block">
-            <darkgreen>GameObject</darkgreen>(<gray>window</gray>, <gray>shape</gray>, <gray>width</gray>, <gray>height</gray>, <gray>x</gray>, <gray>y</gray>, <gray>color</gray>) <br><br>
+            <darkgreen>GameObject</darkgreen>(<gray>window</gray>, <gray>shape</gray>, <gray>size</gray>, <gray>x</gray>, <gray>y</gray>, <gray>color</gray>) <br><br>
         </div>
     </div>
 
@@ -82,16 +85,18 @@
         <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/input.py"><gray>mandaw.input</gray></a>
     </div>
 
-    <h2 style="text-align: center; position: relative; top: 650px;">Controls</h2>
+    <h2 style="text-align: center; position: relative; top: 650px;">Input</h2>
 
     <div class="docs" style="top: 700px;">
-        <gray>pressed</gray> = <darkgreen>pygame</darkgreen>.<gray>key</gray>.<yellow>get_pressed</yellow>() <br><br>
+        <gray>pressed</gray> = <darkgreen>pygame</darkgreen>.<gray>key</gray>.<yellow>get_pressed</yellow>() <br>
+        <gray>mouse</gray> = <darkgreen>pygame</darkgreen>.<gray>mouse</gray>.<yellow>get_pressed</yellow>() <br><br>
 
-        <yellow>update</yellow>(<gray>self</gray>) <br>
-        <yellow>is_key_pressed</yellow>(<gray>self</gray>, <gray>key</gray>) <br><br><br><br>
+        <yellow>update</yellow>(<gray>self</gray>) <br><br>
+        <yellow>get_key_pressed</yellow>(<gray>self</gray>, <gray>key</gray>) <br>
+        <yellow>get_mouse_button</yellow>(<gray>self</gray>, <gray>button</gray>) <br><br><br><br>
         
         <div class="code_block">
-            <darkgreen>Controls</darkgreen>() <br><br>
+            <darkgreen>Input</darkgreen>() <br><br>
         </div>
     </div>
 
@@ -102,8 +107,8 @@
     </div>
 
     <div class="docs" style="top: 950px;">
-        <gray>window</gray> = <blue>None</blue><br>
-        <gray>image</gray> = <blue>None</blue><br>
+        <gray>window</gray> = <gray>type</gray>: <darkgreen>Mandaw</darkgreen><br>
+        <gray>image</gray> = <gray>type</gray>: <blue>FileType</blue><br>
         <gray>x</gray> = <green>0</green><br>
         <gray>y</gray> = <green>0</green><br>
         <gray>size</gray> = (<green>200</green>, <green>200</green>) <br>
@@ -133,8 +138,8 @@
     </div>
 
     <div class="docs" style="top: 1200px;">
-        <gray>anim_folder</gray> = <blue>None</blue> <br>
-        <gray>anim_time</gray> = <blue>None</blue><br>
+        <gray>anim_folder</gray> = <gray>type</gray>: <blue>FileType</blue> <br>
+        <gray>anim_time</gray> = <gray>type</gray>: <green>Int</green><br>
         <gray>frames</gray> = [] <br>
         <gray>count</gray> = <darkgreen>len</darkgreen>(<gray>frames</gray>) <br><br><br><br>
         
@@ -150,7 +155,7 @@
     </div>
 
     <div class="docs" style="top: 1450px;">
-        <gray>color</gray> = <blue>None</blue> <br><br><br><br>
+        <gray>color</gray> = <gray>type</gray>: <orange>String</orange> <br><br><br><br>
 
         <div class="code_block">
             <darkgreen>Color</darkgreen>(<gray>color</gray>)
@@ -164,10 +169,10 @@
     </div>
 
     <div class="docs" style="top: 1700px;">
-        <gray>window</gray> = <blue>None</blue><br>
-        <gray>text</gray> = <blue>None</blue><br>
+        <gray>window</gray> = <gray>type</gray>: <darkgreen>Mandaw</darkgreen><br>
+        <gray>text</gray> = <gray>type</gray>: <orange>String</orange><br>
         <gray>font_size</gray> = <green>24</green><br>
-        <gray>style</gray> = <blue>None</blue><br>
+        <gray>style</gray> = <gray>type</gray>: <orange>String</orange><br>
         <gray>color</gray> = <orange>"white"</orange><br>
         <gray>x</gray> = <green>0</green><br>
         <gray>y</gray> = <green>0</green><br>
@@ -188,8 +193,8 @@
     </div>
 
     <div class="docs" style="top: 1950px;">
-        <gray>file</gray> = <blue>None</blue> <br>
-        <gray>volume</gray> = <blue>None</blue> <br><br>
+        <gray>file</gray> = <gray>type</gray>: <orange>String</orange> <br>
+        <gray>volume</gray> = <gray>type</gray>: <green>Int</green> <br><br>
         <yellow>play</yellow>(<gray>self</gray>) <br>
         <yellow>pause</yellow>(<gray>self</gray>) <br>
         <yellow>resume</yellow>(<gray>self</gray>) <br>
@@ -207,10 +212,10 @@
     </div>
 
     <div class="docs" style="top: 2200px">
-        <gray>window</gray> = <blue>None</blue><br>
-        <gray>color</gray> = <blue>None</blue><br>
-        <gray>start_pos</gray> = <blue>None</blue><br>
-        <gray>end_pos</gray> = <blue>None</blue><br><br><br><br>
+        <gray>window</gray> = <gray>type</gray>: <darkgreen>Mandaw</darkgreen><br>
+        <gray>color</gray> = <gray>type</gray>: <orange>String</orange><br>
+        <gray>start_pos</gray> = <gray>type</gray>: <green>Int</green><br>
+        <gray>end_pos</gray> = <gray>type</gray>: <green>Int</green><br><br><br><br>
 
         <div class="code_block">
             <darkgreen>Line</darkgreen>(<gray>window</gray>, <gray>color</gray>, <gray>start_pos</gray>, <gray>end_pos</gray>)
@@ -224,8 +229,8 @@
     </div>
 
     <div class="docs" style="top: 2450px;">
-        <gray>window</gray> = <blue>None</blue><br>
-        <gray>mask_img</gray> = <blue>None</blue><br><br>
+        <gray>window</gray> = <gray>type</gray>: <darkgreen>Mandaw</darkgreen><br>
+        <gray>mask_img</gray> = <gray>type</gray>: <orange>FileType</orange><br><br>
 
         <yellow>light_init</yellow>(<gray>self</gray>, <gray>pos</gray>) <br>
         <yellow>draw</yellow>(<gray>self</gray>) <br><br><br><br>
