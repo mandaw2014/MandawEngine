@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="./css/docs.css">
+    <title>MandawEngine</title>
+    
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/nav.css">
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -30,216 +31,99 @@
         </nav>
     </header>
 
-    <h1 style="top: 100px;">Mandaw</h1>
+    <h2 id="slogan">2D at its simplest.</h2>
+    <img src="./assets/bg.png" id="bg">
+
+    <br>
+    <h1 style="text-align: center;">Getting Started</h1>
+    <h2 id="install">Installation</h2>
+    <div class="code_block" style="top: 100px;">
+       <purple>pip</purple> install mandaw
+    </div>
+
+    <h2 style="text-align: center; position: relative; top: 200px;">Or To Install The Latest Version</h2>
+    <h3 style="text-align: center; position: relative; top: 250px;"><br>Download The Zip In The Github <br><br> On Windows: <br><br> Run The install.bat <br><br> On Mac and Linux:</h3>
+
+    <div class="code_block" style="top: 280px;">
+        <purple>python3</purple> setup.py install
+    </div>
+
+    <h2 style="text-align: center; position: relative; top: 350px;">Making a Window</h2>
+    <h3 style="text-align: center; position: relative; top: 400px;">First, Import Mandaw</h3>
+
+    <div class="code_block" style="top: 450px;">
+        <purple>from</purple> mandaw <purple>import</purple> *
+    </div>
+
+    <h3 style="text-align: center; position: relative; top: 500px;">Then Call Mandaw</h3>
+
+    <div class="code_block" style="top: 550px;">
+        mandaw = Mandaw(<gray>title</gray> = <orange>"Mandaw"</orange>, <gray>width</gray> = <green>800</green>, <gray>height</gray> = <green>600</green>, <gray>bg_color</gray> = <orange>"cyan"</orange>)
+    </div>
+
+    <h3 style="text-align: center; position: relative; top: 600px;">And then Run Mandaw with</h3>
+
+    <div class="code_block" style="top: 650px;">
+        <purple>while</purple> <blue>True</blue>: mandaw.<yellow>run</yellow>()
+    </div>
+
+    <h2 style="text-align: center; position: relative; top: 700px;">Making A Square</h2>
+    <h3 style="text-align: center; position: relative; top: 750px;">Declare the Square With GameObject</h3>
+
+    <div class="code_block" style="top: 800px;">
+        square = GameObject(<gray>window</gray> = mandaw, <gray>shape</gray> = <orange>"rect"</orange>, <gray>size</gray> = (<green>20</green>,<green>20</green>), <gray>x</gray> = <green>0</green>, <gray>y</gray> = <green>0</green>, <gray>color</gray> = <orange>"white"</orange>)
+    </div>
+
+    <h3 style="text-align: center; position: relative; top: 850px;">Then to Center it, write</h3>
+
+    <div class="code_block" style="top: 900px;">
+        square.<yellow>center</yellow>()
+    </div>
+
+    <h3 style="text-align: center; position: relative; top: 950px;">Then in the <purple>while</purple> <blue>True</blue>: loop, write</h3>
     
-    <div style="text-align: center; position: relative; top: 105px;">
-        <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/main.py"><gray>mandaw.main</gray></a>
+    <div class="code_block" style="top: 1000px;">
+        square.<yellow>draw</yellow>()
     </div>
 
-    <div class="docs" style="top: 150px;">
-        <gray>title</gray> = <orange>"Mandaw"</orange><br>
-        <gray>width</gray> = <green>800</green><br>
-        <gray>height</gray> = <green>600</green><br>
-        <gray>bg_color</gray> = <orange>"black"</orange><br><br>
-        <lightgray># Background sprite</lightgray><br>
-        <gray>background</gray> = <gray>type</gray>: <blue>FileType</blue><br><br>
-        <gray>fps</gray> = <green>60</green><br>
-        <gray>keys</gray> = [] <br>
-        <gray>input</gray> = <darkgreen>Input</darkgreen>() <br><br>
-        <yellow>run</yellow>(<gray>self</gray>) <br><br><br><br>
+    <h2 style="text-align: center; position: relative; top: 1050px;">Collisions Between GameObjects</h2>
+    <h3 style="text-align: center; position: relative; top: 1100px;">Make A Ground</h3>
 
-        <div class="code_block">
-            <darkgreen>Mandaw</darkgreen>(<gray>title</gray>, <gray>width</gray>, <gray>height</gray>, <gray>bg_color</gray>) <br><br>
-        </div>
+    <div class="code_block" style="top: 1150px;">
+        ground = GameObject(<gray>window</gray> = mandaw, <gray>shape</gray> = <orange>"rect"</orange>, <gray>size</gray> = (<green>5000</green>, <green>100</green>), <gray>x</gray> = <green>0</green>, <gray>y</gray> = <green>500</green>, <gray>color</gray> = <orange>"gray"</orange>)
     </div>
 
-    <h1 style="top: 350px;">GameObject</h1>
+    <h3 style="text-align: center; position: relative; top: 1200px;">Center It's X</h3>
 
-    <div style="text-align: center; position: relative; top: 355px;">
-        <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/gameobject.py"><gray>mandaw.gameobject</gray></a>
+    <div class="code_block" style="top: 1250px;">
+        ground.<yellow>center_x</yellow>()  <br>
     </div>
 
-    <div class="docs" style="top: 400px;">
-        <gray>window</gray> = <gray>type</gray>: <darkgreen>Mandaw</darkgreen><br>
-        <gray>shape</gray> = <orange>"rect"</orange><br>
-        <gray>size</gray> = (<green>20</green>, <green>20</green>)<br>
-        <gray>x</gray> = <green>0</green><br>
-        <gray>y</gray> = <green>0</green><br>
-        <gray>color</gray> = <orange>"white"</orange><br><br>
-        <yellow>draw</yellow>(<gray>self</gray>) <br>
-        <yellow>center</yellow>(<gray>self</gray>) <br>
-        <yellow>center_x</yellow>(<gray>self</gray>) <br>
-        <yellow>center_y</yellow>(<gray>self</gray>) <br><br>
+    <h3 style="text-align: center; position: relative; top: 1300px;">Draw it in the <purple>while</purple> <blue>True</blue>: loop</h3>
 
-        <lightgray># Can be a <green>GameObject</green> or a <green>List</green> of <green>GameObjects</green></lightgray><br>
-        <yellow>collide</yellow>(<gray>self</gray>, <gray>rect</gray>) <br><br><br><br>
-
-        <div class="code_block">
-            <darkgreen>GameObject</darkgreen>(<gray>window</gray>, <gray>shape</gray>, <gray>size</gray>, <gray>x</gray>, <gray>y</gray>, <gray>color</gray>) <br><br>
-        </div>
+    <div class="code_block" style="top: 1350px;">
+        ground.<yellow>draw</yellow>()
     </div>
 
-    <h1 style="top: 600px;">Input</h1>
+    <h3 style="text-align: center; position: relative; top: 1400px;">Here we can use the <yellow>collide</yellow>() function</h3>
 
-    <div style="text-align: center; position: relative; top: 605px;">
-        <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/input.py"><gray>mandaw.input</gray></a>
+    <div class="code_block" style="top: 1450px;">
+        <gray># Square's y position += 1 x deltaTime</gray> <br>
+        <purple>if</purple> <blue>not</blue> square.<yellow>collide</yellow>(ground): <br> square.<gray>y</gray> += <green>1</green> * mandaw.<gray>dt</gray>
     </div>
 
-    <h2 style="text-align: center; position: relative; top: 650px;">Input</h2>
-
-    <div class="docs" style="top: 700px;">
-        <gray>pressed</gray> = <darkgreen>pygame</darkgreen>.<gray>key</gray>.<yellow>get_pressed</yellow>() <br>
-        <gray>mouse</gray> = <darkgreen>pygame</darkgreen>.<gray>mouse</gray>.<yellow>get_pressed</yellow>() <br><br>
-
-        <yellow>update</yellow>(<gray>self</gray>) <br><br>
-        <yellow>get_key_pressed</yellow>(<gray>self</gray>, <gray>key</gray>) <br>
-        <yellow>get_mouse_button</yellow>(<gray>self</gray>, <gray>button</gray>) <br><br><br><br>
-        
-        <div class="code_block">
-            <darkgreen>Input</darkgreen>() <br><br>
-        </div>
+    <div style="text-align: center; position: relative; top: 1500px;">
+        <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/examples/collision.py">Full Code</a>
     </div>
 
-    <h1 style="top: 900px;">Sprite</h1>
+    <h2 style="text-align: center; position: relative; top: 1600px;">Input in Mandaw</h2>
 
-    <div style="text-align: center; position: relative; top: 905px;">
-        <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/sprite.py"><gray>mandaw.sprite</gray></a>
+    <div class="code_block" style="top: 1650px; font-size: 14px;">
+        <purple>if</purple> mandaw.<gray>input</gray>.<yellow>get_key_pressed</yellow>(mandaw.<gray>keys</gray>[<orange>"A"</orange>]): <br> <yellow>print</yellow>(<orange>"A was pressed!"</orange>) <br>
+        <purple>if</purple> mandaw.<gray>input</gray>.<yellow>get_key_pressed</yellow>(mandaw.<gray>keys</gray>[<orange>"D"</orange>]): <br><yellow>print</yellow>(<orange>"D was pressed!"</orange>) <br><br>
+        <purple>if</purple> mandaw.<gray>input</gray>.<yellow>get_mouse_button</yellow>(<br> mandaw.<gray>mouse_buttons</gray>[<orange>"LEFT"</orange>]): <br><yellow>print</yellow>(<orange>"Left mouse button was pressed!</orange>)
     </div>
 
-    <div class="docs" style="top: 950px;">
-        <gray>window</gray> = <gray>type</gray>: <darkgreen>Mandaw</darkgreen><br>
-        <gray>image</gray> = <gray>type</gray>: <blue>FileType</blue><br>
-        <gray>x</gray> = <green>0</green><br>
-        <gray>y</gray> = <green>0</green><br>
-        <gray>size</gray> = (<green>200</green>, <green>200</green>) <br>
-        <gray>animations</gray> = {} <br>
-        <gray>rect</gray> = <darkgreen>pygame</darkgreen>.<yellow>Rect</yellow>(<gray>x</gray>, <gray>y</gray>, <gray>size</gray>[<green>0</green>], <gray>size</gray>[<green>1</green>]) <br><br>
-
-        <yellow>draw</yellow>(<gray>self</gray>) <br>
-        <yellow>get_width</yellow>(<gray>self</gray>) <br>
-        <yellow>get_height</yellow>(<gray>self</gray>) <br>
-        <yellow>center</yellow>(<gray>self</gray>) <br>
-        <yellow>center_x</yellow>(<gray>self</gray>) <br>
-        <yellow>center_y</yellow>(<gray>self</gray>) <br>
-        <yellow>collide</yellow>(<gray>self</gray>, <gray>rect</gray>) <br>
-        <yellow>resize</yellow>(<gray>self</gray>, <gray>size</gray>) <br>
-        <yellow>add_animation</yellow>(<gray>self</gray>, <gray>animation</gray>, <gray>name</gray>) <br>
-        <yellow>play_animation</yellow>(<gray>self</gray>, <gray>name</gray>, <gray>mirror</gray> = <blue>None</blue>) <br><br><br><br>
-    
-        <div class="code_block">
-            <darkgreen>Sprite</darkgreen>(<gray>window</gray>, <gray>image</gray>, <gray>x</gray>, <gray>y</gray>, <gray>size</gray>)
-        </div>
-    </div>
-
-    <h1 style="top: 1150px;">Animation</h1>
-
-    <div style="text-align: center; position: relative; top: 1155px;">
-        <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/animation.py"><gray>mandaw.animation</gray></a>
-    </div>
-
-    <div class="docs" style="top: 1200px;">
-        <gray>anim_folder</gray> = <gray>type</gray>: <blue>FileType</blue> <br>
-        <gray>anim_time</gray> = <gray>type</gray>: <green>Int</green><br>
-        <gray>frames</gray> = [] <br>
-        <gray>count</gray> = <darkgreen>len</darkgreen>(<gray>frames</gray>) <br><br><br><br>
-        
-        <div class="code_block">
-            <darkgreen>Animation</darkgreen>(<gray>anim_folder</gray>, <gray>anim_time</gray>)
-        </div>
-    </div>
-
-    <h1 style="top: 1400px;">Color</h1>
-
-    <div style="text-align: center; position: relative; top: 1405px;">
-        <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/color.py"><gray>mandaw.color</gray></a>
-    </div>
-
-    <div class="docs" style="top: 1450px;">
-        <gray>color</gray> = <gray>type</gray>: <orange>String</orange> <br><br><br><br>
-
-        <div class="code_block">
-            <darkgreen>Color</darkgreen>(<gray>color</gray>)
-        </div>
-    </div>
-
-    <h1 style="top: 1650px;">Text</h1>
-
-    <div style="text-align: center; position: relative; top: 1655px;">
-        <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/text.py"><gray>mandaw.text</gray></a>
-    </div>
-
-    <div class="docs" style="top: 1700px;">
-        <gray>window</gray> = <gray>type</gray>: <darkgreen>Mandaw</darkgreen><br>
-        <gray>text</gray> = <gray>type</gray>: <orange>String</orange><br>
-        <gray>font_size</gray> = <green>24</green><br>
-        <gray>style</gray> = <gray>type</gray>: <orange>String</orange><br>
-        <gray>color</gray> = <orange>"white"</orange><br>
-        <gray>x</gray> = <green>0</green><br>
-        <gray>y</gray> = <green>0</green><br>
-        <gray>font</gray> = <darkgreen>pygame</darkgreen>.<gray>font</gray>.<yellow>SysFont</yellow>(<gray>style</gray>, <gray>font_size</gray>) <br>
-        <gray>text</gray> = <gray>font</gray>.<yellow>render</yellow>(<gray>text</gray>, <blue>True</blue>, <gray>color</gray>) <br><br>
-        <yellow>draw</yellow>(<gray>self</gray>) <br>
-        <yellow>center</yellow>(<gray>self</gray>) <br><br><br><br>
-
-        <div class="code_block">
-            <darkgreen>Text</darkgreen>(<gray>window</gray>, <gray>text</gray>, <gray>font_size</gray>, <gray>style</gray>, <gray>color</gray> <gray>x</gray>, <gray>y</gray>)
-        </div>
-    </div>
-
-    <h1 style="top: 1900px;">Audio</h1>
-
-    <div style="text-align: center; position: relative; top: 1905px;">
-        <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/audio.py"><gray>mandaw.audio</gray></a>
-    </div>
-
-    <div class="docs" style="top: 1950px;">
-        <gray>file</gray> = <gray>type</gray>: <orange>String</orange> <br>
-        <gray>volume</gray> = <gray>type</gray>: <green>Int</green> <br><br>
-        <yellow>play</yellow>(<gray>self</gray>) <br>
-        <yellow>pause</yellow>(<gray>self</gray>) <br>
-        <yellow>resume</yellow>(<gray>self</gray>) <br>
-        <yellow>stop</yellow>(<gray>self</gray>) <br><br><br><br>
-
-        <div class="code_block">
-            <darkgreen>Audio</darkgreen>(<gray>file</gray>, <gray>volume</gray>)
-        </div>
-    </div>
-
-    <h1 style="top: 2150px;">Line</h1>
-
-    <div style="text-align: center; position: relative; top: 2155px;">
-        <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/line.py"><gray>mandaw.line</gray></a>
-    </div>
-
-    <div class="docs" style="top: 2200px">
-        <gray>window</gray> = <gray>type</gray>: <darkgreen>Mandaw</darkgreen><br>
-        <gray>color</gray> = <gray>type</gray>: <orange>String</orange><br>
-        <gray>start_pos</gray> = <gray>type</gray>: <green>Int</green><br>
-        <gray>end_pos</gray> = <gray>type</gray>: <green>Int</green><br><br><br><br>
-
-        <div class="code_block">
-            <darkgreen>Line</darkgreen>(<gray>window</gray>, <gray>color</gray>, <gray>start_pos</gray>, <gray>end_pos</gray>)
-        </div>
-    </div>
-
-    <h1 style="top: 2400px;">Light</h1>
-
-    <div style="text-align: center; position: relative; top: 2405px;">
-        <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/light.py"><gray>mandaw.light</gray></a>
-    </div>
-
-    <div class="docs" style="top: 2450px;">
-        <gray>window</gray> = <gray>type</gray>: <darkgreen>Mandaw</darkgreen><br>
-        <gray>mask_img</gray> = <gray>type</gray>: <orange>FileType</orange><br><br>
-
-        <yellow>light_init</yellow>(<gray>self</gray>, <gray>pos</gray>) <br>
-        <yellow>draw</yellow>(<gray>self</gray>) <br><br><br><br>
-
-        <div class="code_block">
-            <darkgreen>Light</darkgreen>(<gray>window</gray>, <gray>mask_img</gray>)
-        </div>
-    </div>
-
-    <div style="position: relative; top: 2600px;">.</div>
+    <div style="position: relative; top: 1750px;">.</div>
 </body>
 </html>
