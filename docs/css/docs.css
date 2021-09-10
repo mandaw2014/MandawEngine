@@ -30,6 +30,10 @@ gray {
     color: rgb(119, 119, 119);
 }
 
+lightgray {
+    color: rgb(177, 177, 177);
+}
+
 orange {
     color: rgba(255, 115, 0, 0.699);
 }
