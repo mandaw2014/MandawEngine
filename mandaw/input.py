@@ -14,3 +14,6 @@ class Input:
 
     def get_mouse_button(self, button):
         return self.mouse[button]
+
+    def get_mouse_pos(self):
+        return pygame.mouse.get_pos()
