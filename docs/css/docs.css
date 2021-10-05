@@ -30,26 +30,30 @@ gray {
     color: rgb(119, 119, 119);
 }
 
-lightgray {
-    color: rgb(177, 177, 177);
-}
-
 orange {
     color: rgba(255, 115, 0, 0.699);
 }
 
 green {
-    color: rgb(152, 255, 56);
-}
-
-darkgreen {
-    color: rgb(128, 182, 1);
+    color: rgb(164, 219, 113);
 }
 
 blue {
     color: rgb(3, 61, 253);
 }
 
+lightblue {
+    color: rgb(166, 187, 255);
+}
+
 yellow {
     color: rgb(219, 186, 0);
+}
+
+darkgreen {
+    color: rgb(2, 141, 60);
+}
+
+lightgray {
+    color: rgb(177, 177, 177);
 }

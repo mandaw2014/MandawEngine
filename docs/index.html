@@ -26,7 +26,7 @@
             <ul class="navlinks">
                 <li><a href="./docs.html">Documentation</a></li>
                 <li><a href="./contact.html">Contact</a></li>
-                <li><a href="https://github.com/mandaw2014/MandawEngine/tree/master/mandaw/examples" class="contact">Projects</a></li>
+                <li><a href="https://github.com/mandaw2014/MandawEngineSDL/tree/master/mandaw/examples" class="contact">Projects</a></li>
             </ul>
         </nav>
     </header>
@@ -41,11 +41,10 @@
        <purple>pip</purple> install mandaw
     </div>
 
-    <h2 style="text-align: center; position: relative; top: 200px;">Or To Install The Latest Version</h2>
-    <h3 style="text-align: center; position: relative; top: 250px;"><br>Download The Zip In The Github <br><br> On Windows: <br><br> Run The install.bat <br><br> On Mac and Linux:</h3>
+    <h2 style="text-align: center; position: relative; top: 200px;">Or To Install The Latest Version From Github</h2>
 
     <div class="code_block" style="top: 280px;">
-        <purple>python3</purple> setup.py install
+        <purple>pip</purple> install <br> https://github.com/mandaw2014/ <br> mandawenginesdl/archive/master.zip
     </div>
 
     <h2 style="text-align: center; position: relative; top: 350px;">Making a Window</h2>
@@ -58,20 +57,20 @@
     <h3 style="text-align: center; position: relative; top: 500px;">Then Call Mandaw</h3>
 
     <div class="code_block" style="top: 550px;">
-        mandaw = Mandaw(<gray>title</gray> = <orange>"Mandaw"</orange>, <gray>width</gray> = <green>800</green>, <gray>height</gray> = <green>600</green>, <gray>bg_color</gray> = <orange>"cyan"</orange>)
+        mandaw = <darkgreen>Mandaw</darkgreen>(<gray>title</gray> = <orange>"Mandaw"</orange>, <gray>width</gray> = <green>800</green>, <gray>height</gray> = <green>600</green>, <gray>bg_color</gray> = <darkgreen>Color</darkgreen>(<green>0</green>, <green>0</green>, <green>0</green>))
     </div>
 
     <h3 style="text-align: center; position: relative; top: 600px;">And then Run Mandaw with</h3>
 
     <div class="code_block" style="top: 650px;">
-        <purple>while</purple> <blue>True</blue>: mandaw.<yellow>run</yellow>()
+        <purple>while</purple> <blue>True</blue>: <lightblue>mandaw</lightblue>.<yellow>run</yellow>()
     </div>
 
     <h2 style="text-align: center; position: relative; top: 700px;">Making A Square</h2>
     <h3 style="text-align: center; position: relative; top: 750px;">Declare the Square With GameObject</h3>
 
     <div class="code_block" style="top: 800px;">
-        square = GameObject(<gray>window</gray> = mandaw, <gray>shape</gray> = <orange>"rect"</orange>, <gray>size</gray> = (<green>20</green>,<green>20</green>), <gray>x</gray> = <green>0</green>, <gray>y</gray> = <green>0</green>, <gray>color</gray> = <orange>"white"</orange>)
+        square = <darkgreen>GameObject</darkgreen>(<gray>window</gray> = <lightblue>mandaw</lightblue>, <gray>width</gray> = <green>20</green>, <gray>height</gray> = <green>20</green>, <gray>x</gray> = <green>0</green>, <gray>y</gray> = <green>0</green>, <gray>color</gray> = <darkgreen>Color</darkgreen>(<green>255</green>, <green>155</green>, <green>0</green>))
     </div>
 
     <h3 style="text-align: center; position: relative; top: 850px;">Then to Center it, write</h3>
@@ -90,7 +89,7 @@
     <h3 style="text-align: center; position: relative; top: 1100px;">Make A Ground</h3>
 
     <div class="code_block" style="top: 1150px;">
-        ground = GameObject(<gray>window</gray> = mandaw, <gray>shape</gray> = <orange>"rect"</orange>, <gray>size</gray> = (<green>5000</green>, <green>100</green>), <gray>x</gray> = <green>0</green>, <gray>y</gray> = <green>500</green>, <gray>color</gray> = <orange>"gray"</orange>)
+        ground = <darkgreen>GameObject</darkgreen>(<gray>window</gray> = <lightblue>mandaw</lightblue>, <gray>width</gray> = <green>5000</green>, <gray>height</gray> = <green>100</green>, <gray>x</gray> = <green>0</green>, <gray>y</gray> = <green>500</green>, <gray>color</gray> = <darkgreen>Color</darkgreen>(<green>200</green>, <green>200</green>, <green>200</green>))
     </div>
 
     <h3 style="text-align: center; position: relative; top: 1200px;">Center It's X</h3>
@@ -108,20 +107,19 @@
     <h3 style="text-align: center; position: relative; top: 1400px;">Here we can use the <yellow>collide</yellow>() function</h3>
 
     <div class="code_block" style="top: 1450px;">
-        <gray># Square's y position += 1 x deltaTime</gray> <br>
-        <purple>if</purple> <blue>not</blue> square.<yellow>collide</yellow>(ground): <br> square.<gray>y</gray> += <green>1</green> * mandaw.<gray>dt</gray>
+        <gray># Square's y position += 1</gray> <br>
+        <purple>if</purple> <blue>not</blue> square.<yellow>collide</yellow>(ground): <br> square.<gray>position</gray>.<gray>y</gray> += <green>1</green>
     </div>
 
     <div style="text-align: center; position: relative; top: 1500px;">
-        <a href="https://github.com/mandaw2014/MandawEngine/blob/master/mandaw/examples/collision.py">Full Code</a>
+        <a href="https://github.com/mandaw2014/MandawEngineSDL/blob/master/mandaw/examples/collision.py">Another Collision Example</a>
     </div>
 
     <h2 style="text-align: center; position: relative; top: 1600px;">Input in Mandaw</h2>
 
     <div class="code_block" style="top: 1650px; font-size: 14px;">
-        <purple>if</purple> mandaw.<gray>input</gray>.<yellow>get_key_pressed</yellow>(mandaw.<gray>keys</gray>[<orange>"A"</orange>]): <br> <yellow>print</yellow>(<orange>"A was pressed!"</orange>) <br>
-        <purple>if</purple> mandaw.<gray>input</gray>.<yellow>get_key_pressed</yellow>(mandaw.<gray>keys</gray>[<orange>"D"</orange>]): <br><yellow>print</yellow>(<orange>"D was pressed!"</orange>) <br><br>
-        <purple>if</purple> mandaw.<gray>input</gray>.<yellow>get_mouse_button</yellow>(<br> mandaw.<gray>mouse_buttons</gray>[<orange>"LEFT"</orange>]): <br><yellow>print</yellow>(<orange>"Left mouse button was pressed!</orange>)
+        <purple>if</purple> mandaw.<gray>input</gray>.<lightblue>pressed</lightblue>[mandaw.<gray>input</gray>.<lightblue>keys</lightblue>[<orange>"A"</orange>]]: <br> <yellow>print</yellow>(<orange>"A was pressed!"</orange>) <br>
+        <purple>if</purple> mandaw.<gray>input</gray>.<lightblue>pressed</lightblue>[mandaw.<gray>input</gray>.<lightblue>keys</lightblue>[<orange>"D"</orange>]]: <br><yellow>print</yellow>(<orange>"D was pressed!"</orange>) <br><br>
     </div>
 
     <div style="position: relative; top: 1750px;">.</div>
