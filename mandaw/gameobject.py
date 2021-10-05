@@ -1,54 +1,40 @@
-import pygame
+import sdl2, sdl2.ext
+from mandaw.color import Color
 
-class GameObject(pygame.Rect):
-    def __init__(self, window, shape = "rect", width = 20, height = 20, x = 0, y = 0, color = "white"):
-        self.shape = shape
-        self.width = width
-        self.height = height
+class GameObject(object):
+    def __init__(self, window, width = 20, height = 20, x = 0, y = 0, color = Color(255, 255, 255)):
+        self.entity = sdl2.ext.Entity(world = window.world)
 
         self.window = window
+        self.width = width
+        self.height = height
+        self.x = x
+        self.y = y
+
         self.color = color
 
-        self.position = (x, y)
-        self.x = self.position[0]
-        self.y = self.position[1]
-
-        self.collider = "box"
-
+        self.entity.sprite = self.entity.world.factory.from_color(self.color, (0, 0))
+    
     def draw(self):
-        if self.shape == "rect" or self.shape == "rectangle" or self.shape == "square":
-            pygame.draw.rect(self.window.window, self.color, self)
-        
-        elif self.shape == "ellipse" or self.shape == "circle":
-            pygame.draw.ellipse(self.window.window, self.color, self)
-    
-    def center(self):
-        self.x = self.window.width / 2 - self.width / 2
-        self.y = self.window.height / 2 - self.height / 2
-    
-    def center_x(self):
-        self.x = self.window.width / 2 - self.width / 2
-
-    def center_y(self):
-        self.y = self.window.height / 2 - self.height / 2
+        self.entity.sprite = self.entity.world.factory.from_color(self.color, (self.width, self.height))
+        self.entity.sprite.position = self.x, self.y
 
     def collide(self, rect):
-        try:
-            if type(rect) != list:
-                return self.colliderect(rect)
-            elif type(rect) == list:
-                return self.collidelistall(rect)
-        except:
-            raise AttributeError("MandawError: sorry but when you typed collide(object), the object wasnt a GameObject or a list of GameObjects. see you soon :)")
+        left, top, right, bottom = self.entity.sprite.area
+        bleft, btop, bright, bbottom = rect.entity.sprite.area
 
-if __name__ == "__main__":
-    from mandaw import *
+        return(bleft < right and bright > left and btop < bottom and bbottom > top)
 
-    mandaw = Mandaw()
+    def collidelist(self, rect):
+        collisions = [True if self.collide(rect[i]) else False for i in range(len(rect))]
+        return any(collisions)
 
-    demo = GameObject(mandaw, shape = "ellipse", width = 20, height = 20, x = 0, y = 0, color = "red")
-    demo.center()
+    def center(self):
+        self.x = int(self.window.width / 2) - int(self.width / 2)
+        self.y = int(self.window.height / 2) - int(self.height / 2)
 
-    while True:
-        demo.draw()
-        mandaw.run()
+    def center_x(self):
+        self.x = int(self.window.width / 2) - int(self.width / 2)
+
+    def center_y(self):
+        self.y = int(self.window.height / 2) - int(self.height / 2)

@@ -1,123 +1,200 @@
 from mandaw import *
-import random
+import sdl2.ext
 
-# General Setup
-mandaw = Mandaw("Pong")
+mandaw = Mandaw("Pong", 800, 600)
 
-bg_color = Color("black")
-light_gray = (200, 200, 200)
+BLACK = Color(0, 0, 0)
+WHITE = Color(255, 255, 255)
 
-score1 = 0
-score2 = 0
+PADDLE_SPEED = 3
+BALL_SPEED = 4
 
-class Paddle(GameObject):
-    def __init__(self, x, y):
+class CollisionSystem(sdl2.ext.Applicator):
+    def __init__(self, minx, miny, maxx, maxy):
+        super().__init__()
+
+        self.componenttypes = Velocity, sdl2.ext.Sprite
+        self.ball = None
+        self.minx = minx
+        self.miny = miny
+        self.maxx = maxx
+        self.maxy = maxy
+
+    def _overlap(self, item):
+        sprite = item[1]
+        if sprite == self.ball.sprite:
+            return False
+
+        left, top, right, bottom = sprite.area
+        bleft, btop, bright, bbottom = self.ball.sprite.area
+
+        return (bleft < right and bright > left and btop < bottom and bbottom > top)
+
+    def process(self, world, componentsets):
+        collitems = [comp for comp in componentsets if self._overlap(comp)]
+
+        if len(collitems) != 0:
+            self.ball.velocity.vx = -self.ball.velocity.vx
+
+            sprite = collitems[0][1]
+            ballcentery = self.ball.sprite.y + self.ball.sprite.size[1] // 2
+            halfheight = sprite.size[1] // 2
+            stepsize = halfheight // 10
+            degrees = 0.7
+            paddlecentery = sprite.y + halfheight
+
+            if ballcentery < paddlecentery:
+                factor = (paddlecentery - ballcentery) // stepsize
+                self.ball.velocity.vy = -int(round(factor * degrees))
+
+            elif ballcentery > paddlecentery:
+                factor = (ballcentery - paddlecentery) // stepsize
+                self.ball.velocity.vy = int(round(factor * degrees))
+
+            else:
+                self.ball.velocity.vy = -self.ball.velocity.vy
+
+        if (self.ball.sprite.y <= self.miny or self.ball.sprite.y + self.ball.sprite.size[1] >= self.maxy):
+            self.ball.velocity.vy = -self.ball.velocity.vy
+
+        if (self.ball.sprite.x <= self.minx or self.ball.sprite.x + self.ball.sprite.size[0] >= self.maxx):
+            self.ball.velocity.vx = -self.ball.velocity.vx
+
+class MovementSystem(sdl2.ext.Applicator):
+    def __init__(self, minx, miny, maxx, maxy):
+        super().__init__()
+
+        self.componenttypes = Velocity, sdl2.ext.Sprite
+        self.minx = minx
+        self.miny = miny
+        self.maxx = maxx
+        self.maxy = maxy
+
+    def process(self, world, componentsets):
+        for velocity, sprite in componentsets:
+            swidth, sheight = sprite.size
+            sprite.x += velocity.vx
+            sprite.y += velocity.vy
+
+            sprite.x = max(self.minx, sprite.x)
+            sprite.y = max(self.miny, sprite.y)
+
+            pmaxx = sprite.x + swidth
+            pmaxy = sprite.y + sheight
+
+            if pmaxx > self.maxx:
+                sprite.x = self.maxx - swidth
+
+            if pmaxy > self.maxy:
+                sprite.y = self.maxy - sheight
+
+class TrackingAIController(sdl2.ext.Applicator):
+    def __init__(self, miny, maxy):
+        super().__init__()
+        self.componenttypes = PlayerData, Velocity, sdl2.ext.Sprite
+        self.miny = miny
+        self.maxy = maxy
+        self.ball = None
+
+    def process(self, world, componentsets):
+        for pdata, vel, sprite in componentsets:
+            if not pdata.ai:
+                continue
+
+            sheight = sprite.size[1]
+            centery = sprite.y + sheight // 2
+
+            if self.ball.velocity.vx < 0:
+                if centery < self.maxy // 2 - PADDLE_SPEED:
+                    vel.vy = PADDLE_SPEED
+                elif centery > self.maxy // 2 + PADDLE_SPEED:
+                    vel.vy = -PADDLE_SPEED
+                else:
+                    vel.vy = 0
+            else:
+                bcentery = self.ball.sprite.y + self.ball.sprite.size[1] // 2
+                if bcentery < centery:
+                    vel.vy = -PADDLE_SPEED
+                elif bcentery > centery:
+                    vel.vy = PADDLE_SPEED
+                else:
+                    vel.vy = 0
+
+class Velocity(object):
+    def __init__(self):
+        super().__init__()
+        self.vx = 0
+        self.vy = 0
+
+class PlayerData(object):
+    def __init__(self):
+        super().__init__()
+        self.ai = False
+        self.points = 0
+
+class Player(GameObject):
+    def __init__(self, world, x, y, ai=False):
         super().__init__(
-            window = mandaw,
-            shape = "rect",
-            width = 10,
-            height = 140,
+            world,
+            width = 20,
+            height = 100,
             x = x,
-            y = y,
-            color = light_gray
+            y = y
         )
 
-        self.player_pos = mandaw.height / 2 - 70
-        self.opponent_speed = 7
-
-    def player_movement(self):
-        self.y = self.player_pos
-
-        if self.top <= 0:
-            self.top = 0
-        if self.bottom >= mandaw.height:
-            self.bottom = mandaw.height
-
-    def opponent_movement(self):
-        if self.top < ball.y:
-            self.top += self.opponent_speed
-        if self.bottom > ball.y:
-            self.bottom -= self.opponent_speed
-
-        if self.top <= 0:
-            self.top = 0
-        if self.bottom >= mandaw.height:
-            self.bottom = mandaw.height
+        self.velocity = Velocity()
+        self.playerdata = PlayerData()
+        self.playerdata.ai = ai
 
 class Ball(GameObject):
-    def __init__(self):
+    def __init__(self, world, x = 0, y = 0):
         super().__init__(
-            window = mandaw,
-            shape = "ellipse",
+            world,
             width = 20,
             height = 20,
-            x = mandaw.width / 2 - 15,
-            y = mandaw.height / 2 - 15,
-            color = light_gray
+            x = x,
+            y = y
         )
 
-        self.ball_speed_x = 7 * random.choice((1, -1))
-        self.ball_speed_y = 7 * random.choice((1, -1))
+        self.velocity = Velocity()
 
-    def ball_movement(self):
-        global score1
-        global score2
-        # Animate the ball
-        self.x += 1 * self.ball_speed_x * mandaw.dt
-        self.y += 1 * self.ball_speed_y * mandaw.dt
+        self.xpos = x
+        self.ypos = y
 
-        # Collisions
-        if self.top <= 0 or self.bottom >= mandaw.height:
-            self.ball_speed_y *= -1
-        if self.left <= 0:
-            self.ball_reset()
-            score2 += 1
-        elif self.right >= mandaw.width:
-            self.ball_reset()
-            score1 += 1
+    def reset(self):
+        self.x = 390
+        self.y = 290
 
-        if self.colliderect(player) or self.colliderect(opponent):
-            self.ball_speed_x *= -1
+movement = MovementSystem(0, 0, 800, 600)
+collision = CollisionSystem(0, 0, 800, 600)
+aicontroller = TrackingAIController(0, 600)
 
-    def ball_reset(self):
-        self.center()
-        self.ball_speed_y *= random.choice((1, -1))
-        self.ball_speed_x *= random.choice((1, -1))
+mandaw.world.add_system(aicontroller)
+mandaw.world.add_system(movement)
+mandaw.world.add_system(collision)
+mandaw.world.add_system(mandaw.sprite_renderer)
 
-ball = Ball()
-player = Paddle(mandaw.width - 20, mandaw.height / 2 - 70)
-opponent = Paddle(10, mandaw.height / 2 - 70)
+player1 = Player(mandaw.world, 0, 250, False)
+player2 = Player(mandaw.world, 780, 250, True)
 
-speed = 7
+ball = Ball(mandaw.world, 390, 290)
+ball.velocity.vx = -BALL_SPEED
+
+collision.ball = ball
+aicontroller.ball = ball
 
 while True:
-    # Handling inputs
-    if mandaw.input.get_key_pressed(mandaw.keys["UP"]):
-        player.player_pos -= 1 * speed * mandaw.dt
-
-    if mandaw.input.get_key_pressed(mandaw.keys["DOWN"]):
-        player.player_pos += 1 * speed * mandaw.dt
-
-    # Ball movement
-    ball.ball_movement()
+    for event in sdl2.ext.get_events():
+        if event.type == mandaw.input.KEYDOWN:
+            if event.key.keysym.sym == mandaw.input.UP:
+                player1.velocity.vy = -PADDLE_SPEED
+            elif event.key.keysym.sym == mandaw.input.DOWN:
+                player1.velocity.vy = PADDLE_SPEED
+        elif event.type == mandaw.input.KEYUP:
+            if event.key.keysym.sym in (mandaw.input.UP, mandaw.input.DOWN):
+                player1.velocity.vy = 0
     
-    # Player movement
-    player.player_movement()
-
-    # Opponent movement
-    opponent.opponent_movement()
-
-    # Visuals
-    mandaw.window.fill(bg_color)
-    player.draw()
-    opponent.draw()
+    player1.draw()
+    player2.draw()
     ball.draw()
-    score1_text = Text(mandaw, str(score1), 24, None, "white", 10)
-    score2_text = Text(mandaw, str(score2), 24, None, "white", mandaw.width - 20)
-    score1_text.draw()
-    score2_text.draw()
-
-
-    line = Line(mandaw, light_gray, (mandaw.width / 2, 0), (mandaw.width / 2, mandaw.height))
-
-    mandaw.run()
+    mandaw.run() 
