@@ -15,11 +15,11 @@ To Get The Latest Version of MandawEngine:
 
 On Windows:
 ```
-python setup.py install
+pip install https://github.com/mandaw2014/mandawengine/archive/master.zip
 ```
 On Mac and Linux
 ```
-python3 setup.py install
+pip3 install https://github.com/mandaw2014/mandawengine/archive/master.zip
 ```
 
 # Getting Started
