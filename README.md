@@ -1,133 +1,129 @@
 # MandawEngine
-A Game Engine Made in Python with the Pygame Module
+A 2D Python GameEngine Made With PySDL2
 
 Discord: https://discord.gg/MPPqj9PNt3
 
 # Installation
-To Install, type
+To install:
+Type in CMD or Terminal:
 ```
 pip install mandaw
 ```
-To Get The Latest Version of MandawEngine:
-1) Download the zip
-2) Extract the zip
-3) Navigate to the folder in cmd or terminal and type:
-
-On Windows:
+Or to download the latest version from github
+Type in CMD or Terminal:
 ```
-pip install https://github.com/mandaw2014/mandawengine/archive/master.zip
-```
-On Mac and Linux
-```
-pip3 install https://github.com/mandaw2014/mandawengine/archive/master.zip
+pip install https://github.com/mandaw2014/mandawenginesdl/archive/master.zip
 ```
 
-# Getting Started
-import Mandaw
+# Creating A Window
+First, import mandaw
 ```py
 from mandaw import *
 ```
+Call Mandaw
+```py
+mandaw = Mandaw(title = "Mandaw", width = 800, height = 600)
+```
+To run it, type
+```py
+while True:
+    mandaw.run()
+```
 
-Make a window
+# Creating A Square
+Here is what we have so far
 ```py
 from mandaw import *
 
-mandaw = Mandaw() 
+mandaw = Mandaw(title = "Mandaw", width = 800, height = 600)
 
 while True:
     mandaw.run()
 ```
-Make a simple square
+To create a square, type
 ```py
-square = GameObject(mandaw, "rect", x = 0, y = 0, color = "red", width = 20, height = 20)
+square = GameObject(window = mandaw, width = 20, height = 20, color = Color(255, 0, 0))
 ```
-Center it with
-```py
-square.center()
-```
-Draw it
+Then draw it
 ```py
 while True:
     square.draw()
+    ...
 ```
-# Full Code
+Like this
 ```py
 from mandaw import *
 
-mandaw = Mandaw("First Mandaw Game")
+mandaw = Mandaw(title = "Mandaw", width = 800, height = 600)
 
-square = GameObject(mandaw, "rect", x = 0, y = 0, color = "red", width = 20, height = 20)
-square.center()
+square = GameObject(mandaw, width = 20, height = 20, color = Color(255, 0, 0))
 
 while True:
     square.draw()
     mandaw.run()
 ```
-# Collisions Between GameObjects
-What we have so far
+
+# Classes in MandawEngineSDL
+Our starting template
 ```py
 from mandaw import *
 
-mandaw = Mandaw("Collisions!", bg_color = "cyan")
-
-square = GameObject(mandaw, "rect", x = 0, y = 0, color = "orange", width = 20, height = 30)
-square.center()
-
-ground = GameObject(mandaw, "rect", x = 0, y = 0, color = "gray", width = 5000, height = 100)
-ground.center()
-ground.y = 500
-
-while True:
-    square.draw()
-    ground.draw()   
-
-    mandaw.run()
-```
-Here We Can Use The `collide()` Function. For example, We're Going To Make Gravity Here
-```py
-from mandaw import *
-
-mandaw = Mandaw("Collisions!", bg_color = "cyan")
-
-square = GameObject(mandaw, "rect", x = 0, y = 0, color = "orange", width = 20, height = 30)
-square.center()
-
-ground = GameObject(mandaw, "rect", x = 0, y = 0, color = "gray", width = 5000, height = 100)
-ground.center()
-ground.y = 500
-
-while True:
-    # Collision code here
-    if not square.collide(ground):
-        # Square's y position += 1 x deltaTime
-        square.y += 1 * mandaw.dt 
-
-    square.draw()
-    ground.draw()   
-
-    mandaw.run()
-```
-
-# Platformer Controller Prefab
-What we have so far
-```py
-from mandaw import *
-
-mandaw = Mandaw("Platformer Example", bg_color = "cyan")
+mandaw = Mandaw("Classes!", 800, 600)
 
 while True:
     mandaw.run()
 ```
-Import the PlatformerController2D with
+To make a GameObject class in MandawEngineSDL do:
 ```py
-from mandaw.prefabs.platformer_controller import PlatformerController2D
+class Cube(GameObject):
+    def __init__(self):
 ```
-Then call it
+Next, make the `super().__init__()`
 ```py
-player = PlatformerController2D(mandaw, x = 0, y = 0, centered = True)
+super().__init__(
+    window = mandaw,
+    width = 20,
+    height = 20,
+    x = 0,
+    y = 0,
+    color = Color(0, 255, 255)
+)
 ```
-Then in the ```while True:``` loop, call
+In the `__init__` funtion, you can also include `self.center()` or any other variables
+```py
+self.center()
+```
+When you want to call the class, you do
+```py
+cube = Cube()
+```
+And don't forget to draw it
 ```py
 while True:
-    player.movement()
-``` 
+    cube.draw()
+```
+Full Code:
+```py
+from mandaw import *
+
+mandaw = Mandaw("Classes!", 800, 600)
+
+class Cube(GameObject):
+    def __init__(self):
+        super().__init__(
+            window = mandaw,
+            width = 20,
+            height = 20,
+            x = 0,
+            y = 0,
+            color = Color(0, 255, 255)
+        )
+
+        self.center()
+
+cube = Cube()
+
+while True:
+    cube.draw()
+    mandaw.run()
+```
