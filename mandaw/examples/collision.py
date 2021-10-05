@@ -1,23 +1,56 @@
 from mandaw import *
 
-mandaw = Mandaw(title = "Mandaw", width = 800, height = 600, bg_color = "cyan")
+mandaw = Mandaw("Collisions!", 800, 600)
 
-square = GameObject(window = mandaw, shape = "rect", width = 20, height = 30, x = 0, y = 0, color = "orange")
-square.center()
+player = GameObject(mandaw, 30, 30, 0, 0)
+player.center()
 
-ground = GameObject(window = mandaw, shape = "rect", width = 5000, height = 100, x = 0, y = 0, color = "gray")
-ground.center()
-ground.y = 500
+objects = []
 
-sprite = Sprite(mandaw, "assets/adventurer.png", 10, 10, (100, 50))
+class CollisionObject(GameObject):
+    def __init__(self, x, y):
+        super().__init__(
+            mandaw,
+            width = 25,
+            height = 25,
+            x = x,
+            y = y
+        )
 
-while True: 
-    if not square.collide(ground):
-        square.y += 1 * mandaw.dt
-    if not sprite.collide(ground):
-        sprite.y += 1 * mandaw.dt
+object1 = CollisionObject(600, 300)
+object2 = CollisionObject(200, 300)
+object3 = CollisionObject(400, 100)
+object4 = CollisionObject(400, 400)
 
-    square.draw()
-    ground.draw()
-    sprite.draw()
+objects.append(object1)
+objects.append(object2)
+objects.append(object3)
+objects.append(object4)
+
+n = 1
+
+while True:
+    if mandaw.input.pressed[mandaw.input.keys["UP"]]:
+        player.y -= 1 * mandaw.dt
+    if mandaw.input.pressed[mandaw.input.keys["LEFT"]]:
+        player.x -= 1 * mandaw.dt
+    if mandaw.input.pressed[mandaw.input.keys["DOWN"]]:
+        player.y += 1 * mandaw.dt
+    if mandaw.input.pressed[mandaw.input.keys["RIGHT"]]:
+        player.x += 1 * mandaw.dt
+      
+    if mandaw.input.pressed[mandaw.input.keys["G"]]:
+        player.center()
+
+    if player.collidelist(objects):
+        print("Hit! " + str(n))
+        n += 1
+
+    object1.draw()
+    object2.draw()
+    object3.draw()
+    object4.draw()
+
+    player.draw()
+
     mandaw.run()
