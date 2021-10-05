@@ -1,10 +1,10 @@
 import pygame
 
 class GameObject(pygame.Rect):
-    def __init__(self, window, shape = "rect", size = (20, 20), x = 0, y = 0, color = "white"):
+    def __init__(self, window, shape = "rect", width = 20, height = 20, x = 0, y = 0, color = "white"):
         self.shape = shape
-        self.width = size[0]
-        self.height = size[1]
+        self.width = width
+        self.height = height
 
         self.window = window
         self.color = color
@@ -13,10 +13,10 @@ class GameObject(pygame.Rect):
         self.x = self.position[0]
         self.y = self.position[1]
 
-        self.size = size
+        self.collider = "box"
 
     def draw(self):
-        if self.shape == "rect" or self.shape == "rectangle":
+        if self.shape == "rect" or self.shape == "rectangle" or self.shape == "square":
             pygame.draw.rect(self.window.window, self.color, self)
         
         elif self.shape == "ellipse" or self.shape == "circle":
@@ -33,12 +33,17 @@ class GameObject(pygame.Rect):
         self.y = self.window.height / 2 - self.height / 2
 
     def collide(self, rect):
-        if type(rect) != list:
-            return self.colliderect(rect)
-        elif type(rect) == list:
-            return self.collidelistall(rect)
-        else:
-            print("MandawError: sorry but when you typed collide(object), the object wasnt a string or a list. see you soon :)")
+        if self.collider == "box" and rect.collider == "box":
+            try:
+                if type(rect) != list:
+                    return self.colliderect(rect)
+                elif type(rect) == list:
+                    return self.collidelistall(rect)
+            except:
+                raise AttributeError("MandawError: sorry but when you typed collide(object), the object wasnt a GameObject or a list of GameObjects. see you soon :)")
+
+        elif self.collider == "none" or rect.collider == "none":
+            pass
 
 if __name__ == "__main__":
     from mandaw import *
