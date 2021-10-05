@@ -14,8 +14,10 @@ class Mandaw:
         pygame.init()
         self.clock = pygame.time.Clock()
 
-        self.last_time = time.time()
-        self.dt = 0
+        self.last = 0
+        self.t = pygame.time.get_ticks()
+        self.dt = (self.t - self.last) / 1000.0
+        self.last = self.t
 
         self.window = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption(self.title)
@@ -84,7 +86,7 @@ class Mandaw:
         }
 
         self.mouse_buttons = {
-            "LEFT":0, "MIDDLE":1, "RIGHT":2
+            "LEFT":0, "MIDDLE":1, "RIGHT":2, 
         }
 
     def run(self):
@@ -93,9 +95,9 @@ class Mandaw:
 
         pygame.display.update()
 
-        self.dt = time.time() - self.last_time
-        self.dt *= 60
-        self.last_time = time.time()
+        self.t = pygame.time.get_ticks()
+        self.dt = (self.t - self.last) / 1000.0
+        self.last = self.t
 
         self.input.update()
 
