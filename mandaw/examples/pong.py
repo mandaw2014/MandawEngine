@@ -4,7 +4,7 @@ import random
 # General Setup
 mandaw = Mandaw("Pong")
 
-bg_color = Color("black")
+bg_color = (0, 0, 0)
 light_gray = (200, 200, 200)
 
 score1 = 0

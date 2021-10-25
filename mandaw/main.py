@@ -2,7 +2,7 @@ from mandaw.input import Input
 import os, sys, pygame
 
 class Mandaw:
-    def __init__(self, title = "Mandaw", width = 800, height = 600, bg_color = "black"):
+    def __init__(self, title = "Mandaw", width = 800, height = 600, bg_color = (0, 0, 0)):
         self.width = width
         self.height = height
         self.title = title
@@ -92,6 +92,6 @@ class Mandaw:
 if __name__ == "__main__":
     from mandaw import Mandaw
 
-    mandaw = Mandaw("Mandaw!", width = 800, height = 600, bg_color = "black")
+    mandaw = Mandaw("Mandaw!", width = 800, height = 600, bg_color = (0, 0, 0))
 
     mandaw.loop()
