@@ -59,12 +59,12 @@ class Ball(GameObject):
         self.ball_speed_x = 7 * random.choice((1, -1))
         self.ball_speed_y = 7 * random.choice((1, -1))
 
-    def ball_movement(self):
+    def ball_movement(self, dt):
         global score1
         global score2
         # Animate the ball
-        self.x += 1 * self.ball_speed_x * mandaw.dt
-        self.y += 1 * self.ball_speed_y * mandaw.dt
+        self.x += 50 * self.ball_speed_x * dt
+        self.y += 50 * self.ball_speed_y * dt
 
         # Collisions
         if self.top <= 0 or self.bottom >= mandaw.height:
@@ -90,23 +90,8 @@ opponent = Paddle(10, mandaw.height / 2 - 70)
 
 speed = 7
 
-while True:
-    # Handling inputs
-    if mandaw.input.get_key_pressed(mandaw.keys["UP"]):
-        player.player_pos -= 1 * speed * mandaw.dt
-
-    if mandaw.input.get_key_pressed(mandaw.keys["DOWN"]):
-        player.player_pos += 1 * speed * mandaw.dt
-
-    # Ball movement
-    ball.ball_movement()
-    
-    # Player movement
-    player.player_movement()
-
-    # Opponent movement
-    opponent.opponent_movement()
-
+@mandaw.draw
+def draw():
     # Visuals
     mandaw.window.fill(bg_color)
     player.draw()
@@ -116,8 +101,24 @@ while True:
     score2_text = Text(mandaw, str(score2), 24, None, "white", mandaw.width - 20)
     score1_text.draw()
     score2_text.draw()
-
-
     line = Line(mandaw, light_gray, (mandaw.width / 2, 0), (mandaw.width / 2, mandaw.height))
 
-    mandaw.run()
+@mandaw.update
+def update(dt):
+    # Handling inputs
+    if mandaw.input.get_key_pressed(mandaw.input.keys["UP"]):
+        player.player_pos -= 50 * speed * dt
+
+    if mandaw.input.get_key_pressed(mandaw.input.keys["DOWN"]):
+        player.player_pos += 50 * speed * dt
+
+    # Ball movement
+    ball.ball_movement(dt)
+    
+    # Player movement
+    player.player_movement()
+
+    # Opponent movement
+    opponent.opponent_movement()
+
+mandaw.loop()

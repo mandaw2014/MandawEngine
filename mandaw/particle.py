@@ -6,7 +6,6 @@ import random
 
 import mandaw
 
-
 class Particle:
 
     def __init__(self, WIN: pygame.surface.Surface, x: int, y: int, vel_x: float, vel_y: float, shrink_amount: float,
@@ -71,8 +70,6 @@ class Particle:
                     self.vel_x *= (-0.75) * dt
                     self.x += (self.vel_x * 2) * dt
                     self.update_rect()
-
-
 
 class ParticleSpawner:
     def __init__(self, window: mandaw.Mandaw, part_count: Union[int, list, tuple] = 1,

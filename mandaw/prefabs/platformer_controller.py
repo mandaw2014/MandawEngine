@@ -39,14 +39,14 @@ class PlatformerController2D(GameObject):
 
         self.window = window
 
-    def movement(self):
+    def movement(self, dt):
         # Player movement
-        if self.window.input.get_key_pressed(self.window.keys["A"]):
-            self.pos_x -= self.speed * self.window.dt
+        if self.window.input.get_key_pressed(self.window.input.keys["A"]):
+            self.pos_x -= self.speed * dt
             self.direction = 0
 
-        if self.window.input.get_key_pressed(self.window.keys["D"]):
-            self.pos_x += self.speed * self.window.dt
+        if self.window.input.get_key_pressed(self.window.input.keys["D"]):
+            self.pos_x += self.speed * dt
             self.direction = 1
 
         # Momentum
@@ -68,26 +68,26 @@ class PlatformerController2D(GameObject):
             if not self.collide(self.ignore_speed):
                 self.maxspeed = 3
 
-            if self.direction == 0 and not self.window.input.get_key_pressed(self.window.keys["A"]):
-                self.pos_x += 10 * self.window.dt
+            if self.direction == 0 and not self.window.input.get_key_pressed(self.window.input.keys["A"]):
+                self.pos_x += 10 * dt
 
                 if self.pos_x >= 0:
                     self.pos_x = 0
             
-            if self.direction == 1 and not self.window.input.get_key_pressed(self.window.keys["D"]):
-                self.pos_x -= 10 * self.window.dt
+            if self.direction == 1 and not self.window.input.get_key_pressed(self.window.input.keys["D"]):
+                self.pos_x -= 10 * dt
 
                 if self.pos_x <= 0:
                     self.pos_x = 0
 
         if not self.collide(self.collision_objects):
-            if self.direction == 0 and not self.window.input.get_key_pressed(self.window.keys["A"]):
+            if self.direction == 0 and not self.window.input.get_key_pressed(self.window.input.keys["A"]):
                 self.pos_x += 0.1
 
                 if self.pos_x >= 0:
                     self.pos_x = 0
             
-            if self.direction == 1 and not self.window.input.get_key_pressed(self.window.keys["D"]):
+            if self.direction == 1 and not self.window.input.get_key_pressed(self.window.input.keys["D"]):
                 self.pos_x -= 0.1
 
                 if self.pos_x <= 0:
@@ -100,7 +100,7 @@ class PlatformerController2D(GameObject):
 
     def jump(self):
         # Jumping
-        if self.is_jumping == False and self.window.input.get_key_pressed(self.window.keys["SPACE"]):
+        if self.is_jumping == False and self.window.input.get_key_pressed(self.window.input.keys["SPACE"]):
             self.is_jumping = True
             if not self.collide(self.collision_objects):
                 self.is_jumping = False
@@ -123,8 +123,13 @@ if __name__ == "__main__":
 
     player.collision_objects.append(ground)
 
-    while True:
-        player.movement()
+    @mandaw.draw
+    def draw():
         player.draw()
         ground.draw()
-        mandaw.run()
+
+    @mandaw.update
+    def update(dt):
+        player.movement(dt)
+    
+    mandaw.loop()

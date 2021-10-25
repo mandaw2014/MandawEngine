@@ -35,6 +35,8 @@ if __name__ == '__main__':
     text = Text(mandaw, "Mandaw", 50)
     text.center()
 
-    while True:
+    @mandaw.draw
+    def draw():
         text.draw()
-        mandaw.run()
+
+    mandaw.loop()

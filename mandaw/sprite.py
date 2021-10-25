@@ -1,21 +1,23 @@
 import pygame
 
 class Sprite:
-    def __init__(self, window, image, x, y, size = (200, 200)):
+    def __init__(self, window, image, x, y, width = 200, height = 200):
         self.animations = {}
         self.image = pygame.image.load(image)
-        if size is not None:
-            self.image = pygame.transform.scale(self.image, size)
+
+        if width and height is not None:
+            self.image = pygame.transform.scale(self.image, (width, height))
+        
         self.window = window
         self.x = x
         self.y = y
-        self.size = size
+        self.width = width
+        self.height = height
         self.rect = pygame.Rect(0, 0, 0, 0)
 
     def draw(self):
-        self.rect = pygame.Rect(self.x, self.y, self.size[0], self.size[1])
+        self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
         self.window.window.blit(self.image, (self.x, self.y))
-
 
     def get_width(self):
         return self.image.get_width()
@@ -24,14 +26,14 @@ class Sprite:
         return self.image.get_height()
 
     def center(self):
-        self.x = self.window.width / 2 - self.size[0]
-        self.y = self.window.height / 2 - self.size[1]
+        self.x = self.window.width / 2 - self.width
+        self.y = self.window.height / 2 - self.height
 
     def center_x(self):
-        self.x = self.window.width / 2 - self.size[0]
+        self.x = self.window.width / 2 - self.width
 
     def center_y(self):
-        self.y = self.window.height / 2 - self.size[1]
+        self.y = self.window.height / 2 - self.height
 
     def collide(self, rect):
         if type(rect) != list:
@@ -42,8 +44,8 @@ class Sprite:
             print("MandawError: sorry but when you typed collide(object), the object wasnt a string or a list. see "
                   "you soon :)")
 
-    def resize(self, size):
-        self.image = pygame.transform.scale(self.image, size)
+    def resize(self, width, height):
+        self.image = pygame.transform.scale(self.image, (width, height))
 
     def add_animation(self, animation, name):
         self.animations[name] = {"frames": animation.frames, "length": animation.count, "cooldown": animation.anim_time,
@@ -58,7 +60,7 @@ class Sprite:
                 if self.animations[i]["count"] >= self.animations[i]["length"]:
                     self.animations[i]["count"] = 0
 
-                if self.size is None:
+                if self.width and self.height is None:
                     if mirror is None:
                         self.image = pygame.image.load(self.animations[i]["folder"] + "/" +
                                                        self.animations[i]["frames"][int(self.animations[i]["count"])])
@@ -77,25 +79,24 @@ class Sprite:
                         self.image = pygame.transform.scale(pygame.image.load(self.animations[i]["folder"] + "/" +
                                                                               self.animations[i]["frames"][
                                                                                   int(self.animations[i]["count"])]),
-                                                            self.size)
+                                                            (self.width, self.height))
                     elif mirror == "x":
                         self.image = pygame.transform.flip(
                             pygame.transform.scale(pygame.image.load(self.animations[i]["folder"] + "/" +
                                                                      self.animations[i]["frames"][
                                                                          int(self.animations[i]["count"])]),
-                                                   self.size), True, False)
+                                                   (self.width, self.height)), True, False)
                     elif mirror == "y":
                         self.image = pygame.transform.flip(
                             pygame.transform.scale(pygame.image.load(self.animations[i]["folder"] + "/" +
                                                                      self.animations[i]["frames"][
                                                                          int(self.animations[i]["count"])]),
-                                                   self.size),
+                                                   (self.width, self.height)),
                             True, False)
 
                 self.draw()
              
 if __name__ == '__main__':
-
     from mandaw import *
     import os
 
@@ -106,11 +107,8 @@ if __name__ == '__main__':
 
     image = Sprite(mandaw, bird, 0, 0)
 
-    width = image.get_width()
-    height = image.get_height()
-
-    print(width, height)
-
-    while True:
+    @mandaw.draw
+    def draw():
         image.draw()
-        mandaw.run()
+    
+    mandaw.loop()

@@ -14,20 +14,24 @@ mandaw = Mandaw("Bouncing Ball!")
 ball = GameObject(mandaw, "ellipse")
 ball.center()
 
-ballx, bally = mandaw.width / 2, mandaw.height / 2
-vx, vy = 5, 5
+ball.ballx, ball.bally = mandaw.width / 2, mandaw.height / 2
+ball.vx, ball.vy = 300, 300
 
-while True:
-    ballx += vx
-    bally += vy
-
-    if ballx < 0 or ballx > mandaw.width - 20:
-        vx = -vx
-    if bally < 0 or bally > mandaw.height - 20:
-        vy = -vy
-
-    ball.x = ballx
-    ball.y = bally
-
+@mandaw.draw
+def draw():
     ball.draw()
-    mandaw.run()
+
+@mandaw.update
+def update(dt):
+    ball.ballx += ball.vx * dt
+    ball.bally += ball.vy * dt
+
+    if ball.ballx < 0 or ball.ballx > mandaw.width - 20:
+        ball.vx = -ball.vx
+    if ball.bally < 0 or ball.bally > mandaw.height - 20:
+        ball.vy = -ball.vy
+
+    ball.x = ball.ballx
+    ball.y = ball.bally
+
+mandaw.loop()

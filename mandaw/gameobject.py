@@ -9,9 +9,8 @@ class GameObject(pygame.Rect):
         self.window = window
         self.color = color
 
-        self.position = (x, y)
-        self.x = self.position[0]
-        self.y = self.position[1]
+        self.x = x
+        self.y = y
 
         self.collider = "box"
 
@@ -49,6 +48,8 @@ if __name__ == "__main__":
     demo = GameObject(mandaw, shape = "ellipse", width = 20, height = 20, x = 0, y = 0, color = "red")
     demo.center()
 
-    while True:
+    @mandaw.draw
+    def draw():
         demo.draw()
-        mandaw.run()
+    
+    mandaw.loop()

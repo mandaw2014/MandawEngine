@@ -1,132 +1,19 @@
 from mandaw import *
+from mandaw.prefabs.platformer_controller import PlatformerController2D
 
 # Window
-mandaw = Mandaw("Platformer", bg_color = "cyan")
+mandaw = Mandaw("Platformer!", bg_color = "cyan")
 
 # Ground
-ground = GameObject(mandaw, shape = "rect", size = (5000, 100), x = mandaw.width / 2 - 500, y = 500, color = "gray")
-
-# Objects list
-objects = []
-
-# Player
-class PlatformerController(GameObject):
-    def __init__(self):
-        super().__init__(
-            window = mandaw,
-            shape = "rect",
-            size = (15, 35),
-            color = "orange",
-        )
-
-        self.center()
-        self.y = mandaw.height / 2 + 150
-        
-        # Player's X Position
-        self.pos_x = 0
-
-        # Set the position as a variable
-        self.pos = mandaw.width / 2 - self.width
-
-        self.is_jumping = False
-        self.jump_y = 10
-
-        self.direction = None
-
-        self.velocity_y = 1
-
-        # Player's speed and maxspeed
-        self.speed = 1
-        self.maxspeed = 3
-
-    def movement(self):
-        # Player movement
-        if mandaw.input.get_key_pressed(mandaw.keys["A"]):
-            self.pos_x -= self.speed * mandaw.dt
-            self.direction = 0
-
-        if mandaw.input.get_key_pressed(mandaw.keys["D"]):
-            self.pos_x += self.speed * mandaw.dt
-            self.direction = 1
-
-        # Momentum
-        if self.pos_x >= self.maxspeed:
-            self.pos_x = self.maxspeed
-        if self.pos_x <= -self.maxspeed:
-            self.pos_x = -self.maxspeed
-
-        self.pos += self.pos_x
-
-        # Gravity
-        if not self.collide(objects) and self.is_jumping == False:
-            self.y += 3 * self.velocity_y
-            self.velocity_y += 0.1
-
-        if self.collide(objects):
-            self.velocity_y = 1
-            self.maxspeed = 3
-
-            if self.direction == 0 and not mandaw.input.get_key_pressed(mandaw.keys["A"]):
-                self.pos_x += 10 * mandaw.dt
-
-                if self.pos_x >= 0:
-                    self.pos_x = 0
-            
-            if self.direction == 1 and not mandaw.input.get_key_pressed(mandaw.keys["D"]):
-                self.pos_x -= 10 * mandaw.dt
-
-                if self.pos_x <= 0:
-                    self.pos_x = 0
-
-        if not self.collide(objects):
-            if self.direction == 0 and not mandaw.input.get_key_pressed(mandaw.keys["A"]):
-                self.pos_x += 0.1
-
-                if self.pos_x >= 0:
-                    self.pos_x = 0
-            
-            if self.direction == 1 and not mandaw.input.get_key_pressed(mandaw.keys["D"]):
-                self.pos_x -= 0.1
-
-                if self.pos_x <= 0:
-                    self.pos_x = 0
-            
-        # Platform collisions
-        if self.collide(platform7):
-            self.jump_y = 20
-        if self.collide(platform10):
-            self.jump_y = 20
-        if self.collide(platform12):
-            self.maxspeed = 5
-        if self.collide(platform13):
-            self.maxspeed = 5
-        if self.collide(platform14):
-            self.maxspeed = 5
-
-        # Set the x position as the x variable
-        self.x = self.pos
-
-    def jump(self):
-        # Jumping
-        if self.is_jumping == False and mandaw.input.get_key_pressed(mandaw.keys["SPACE"]):
-            self.is_jumping = True
-            if not self.collide(objects):
-                self.is_jumping = False
-
-        if self.is_jumping == True:
-            self.y -= self.jump_y
-            self.jump_y -= 1
-
-            if self.jump_y < -5:
-                self.is_jumping = False
-                self.jump_y = 10
+ground = GameObject(mandaw, shape = "rect", width = 5000, height = 100, x = mandaw.width / 2 - 500, y = 500, color = "gray")
 
 class Platform(GameObject):
     def __init__(self, x, y):
         super().__init__(
             window = mandaw,
             shape = "rect",
-            size = (50, 10),
+            width = 50,
+            height = 10,
             x = x,
             y = y,
             color = "green"
@@ -137,7 +24,8 @@ class JumpPlatform(GameObject):
         super().__init__(
             window = mandaw,
             shape = "rect",
-            size = (50, 10),
+            width = 50,
+            height = 10,
             x = x,
             y = y,
             color = "orange"
@@ -148,7 +36,8 @@ class SpeedPlatform(GameObject):
         super().__init__(
             window = mandaw,
             shape = "rect",
-            size = (100, 10),
+            width = 100, 
+            height = 10,
             x = x,
             y = y,
             color = "blue"
@@ -159,14 +48,16 @@ class FinishBlock(GameObject):
         super().__init__(
             mandaw,
             shape = "rect",
-            size = (50, 10),
+            width = 50,
+            height = 10,
             x = x,
             y = y,
             color = "yellow"
         )
 
 # Call the player
-player = PlatformerController()
+player = PlatformerController2D(mandaw, 0, 0, True)
+player.y = 400
 
 center_x = mandaw.width / 2
 center_y = mandaw.height / 2
@@ -193,33 +84,30 @@ platform14 = SpeedPlatform(center_x + -320, center_y - 220)
 finishBlock = FinishBlock(center_x + -400, center_y - 220)
 
 # Add platforms to the object list
-objects.append(ground)
-objects.append(platform)
-objects.append(platform1)
-objects.append(platform2)
-objects.append(platform3)
-objects.append(platform4)
-objects.append(platform5)
-objects.append(platform6)
-objects.append(platform7)
-objects.append(platform8)
-objects.append(platform9)
-objects.append(platform10)
-objects.append(platform11)
-objects.append(platform12)
-objects.append(platform13)
-objects.append(platform14)
-objects.append(finishBlock)
+player.collision_objects.append(ground)
+player.collision_objects.append(platform)
+player.collision_objects.append(platform1)
+player.collision_objects.append(platform2)
+player.collision_objects.append(platform3)
+player.collision_objects.append(platform4)
+player.collision_objects.append(platform5)
+player.collision_objects.append(platform6)
+player.collision_objects.append(platform7)
+player.collision_objects.append(platform8)
+player.collision_objects.append(platform9)
+player.collision_objects.append(platform10)
+player.collision_objects.append(platform11)
+player.collision_objects.append(platform12)
+player.collision_objects.append(platform13)
+player.collision_objects.append(platform14)
+player.collision_objects.append(finishBlock)
 
-# Main Game Loop
-while True:
-    # Call the player functions
-    player.movement()
-    player.jump()
-
+@mandaw.draw
+def draw():
     # Draw the ground and player
     player.draw()
     ground.draw()
+
     platform.draw()
     platform1.draw()
     platform2.draw()
@@ -238,5 +126,21 @@ while True:
 
     finishBlock.draw()
 
-    # Run the program
-    mandaw.run()
+# Main Game Loop
+@mandaw.update
+def update(dt):
+    player.movement(dt)
+
+    if player.collide(platform7):
+        player.jump_y = 20
+    if player.collide(platform10):
+        player.jump_y = 20
+    if player.collide(platform12):
+        player.maxspeed = 5
+    if player.collide(platform13):
+        player.maxspeed = 5
+    if player.collide(platform14):
+        player.maxspeed = 5
+
+# Run the program
+mandaw.loop()

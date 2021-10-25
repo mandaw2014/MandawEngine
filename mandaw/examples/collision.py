@@ -11,13 +11,17 @@ ground.y = 500
 
 sprite = Sprite(mandaw, "assets/adventurer.png", 10, 10, (100, 50))
 
-while True: 
-    if not square.collide(ground):
-        square.y += 1 * mandaw.dt
-    if not sprite.collide(ground):
-        sprite.y += 1 * mandaw.dt
-
+@mandaw.draw
+def draw():
     square.draw()
     ground.draw()
     sprite.draw()
-    mandaw.run()
+
+@mandaw.update
+def update(dt):
+    if not square.collide(ground):
+        square.y += 1 * dt
+    if not sprite.collide(ground):
+        sprite.y += 1 * dt
+
+mandaw.loop()
