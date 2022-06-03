@@ -9,7 +9,7 @@ ground = GameObject(window = mandaw, shape = "rect", width = 5000, height = 100,
 ground.center()
 ground.y = 500
 
-sprite = Sprite(mandaw, "assets/adventurer.png", 10, 10, (100, 50))
+sprite = Sprite(mandaw, "assets/adventurer.png", 10, 10, 100, 100)
 
 @mandaw.draw
 def draw():
@@ -20,8 +20,8 @@ def draw():
 @mandaw.update
 def update(dt):
     if not square.collide(ground):
-        square.y += 1 * dt
+        square.y += 150 * dt
     if not sprite.collide(ground):
-        sprite.y += 1 * dt
+        sprite.y += 150 * dt
 
 mandaw.loop()

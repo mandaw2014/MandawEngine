@@ -63,7 +63,7 @@ class Particle:
         else:
             color = WHITE
 
-        GameObject(mandaw, "ellipse", (3, 3), int(self.x), int(self.y), color).draw()
+        GameObject(mandaw, "ellipse", width = 3, height = 3, x = int(self.x), y = int(self.y), color = color).draw()
         
 class Constraint:
     def __init__(self, index0, index1):
@@ -172,9 +172,9 @@ while True:
         if event.type == pygame.MOUSEMOTION and mouse == True:
             find_particle(mandaw.input.get_mouse_pos())
 
-    if mandaw.input.get_key_pressed(mandaw.keys["E"]):
+    if mandaw.input.get_key_pressed(mandaw.input.keys["E"]):
         mouse = True
-    if mandaw.input.get_key_pressed(mandaw.keys["Q"]):
+    if mandaw.input.get_key_pressed(mandaw.input.keys["Q"]):
         mouse = False
 
-    mandaw.run()
+    mandaw.loop()

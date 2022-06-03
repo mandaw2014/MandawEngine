@@ -75,7 +75,7 @@ class ParticleSpawner:
     def __init__(self, window: mandaw.Mandaw, part_count: Union[int, list, tuple] = 1,
                  pos: Union[list, tuple] = (0, 0), size: Union[list, tuple, int] = 20,
                  velocityx: Union[float, list, tuple] = 1, velocityy: Union[float, list, tuple] = 1,
-                 shrink: Union[float, int, list, tuple] = 0.1, color: Union[str, mandaw.Color, tuple, list] = "white",
+                 shrink: Union[float, int, list, tuple] = 0.1, color: Union[str, tuple, list] = "white",
                  collide: bool = False, gravity=0, collide_rects=None):
         if collide_rects is None:
             collide_rects = []
